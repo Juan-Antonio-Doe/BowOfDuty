@@ -301,6 +301,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &493422189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493422190}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &493422190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493422189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 780176633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780176632
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +345,8 @@ GameObject:
   - component: {fileID: 780176636}
   - component: {fileID: 780176634}
   - component: {fileID: 780176635}
-  m_Layer: 0
+  - component: {fileID: 780176638}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,6 +367,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1271960946}
+  - {fileID: 493422190}
+  - {fileID: 1875990302}
   m_Father: {fileID: 1316625538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &780176634
@@ -399,6 +433,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f042eebab05d347bce6d4bf2797465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <_speed>k__BackingField: 2
+  <_jumpForce>k__BackingField: 10
+  <_groundCheck>k__BackingField: {fileID: 493422190}
+  <_groundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1
+  <_rb>k__BackingField: {fileID: 780176635}
+  <_isGrounded>k__BackingField: 0
 --- !u!114 &780176637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +453,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ca21e5c5ce2d44991d0e0f67aecbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &780176638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780176632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: e5343ac3d5844f04992836e49f466b40, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1238906211
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +753,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710707, y: -0, z: -0, w: 0.70710653}
   m_LocalPosition: {x: 0, y: -1, z: -18.75}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -771,13 +843,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875990299}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: 0.965926, z: -0.2588186, w: 0}
+  m_LocalPosition: {x: 0, y: 1.933013, z: 2.2500005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 780176633}
+  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
 --- !u!1 &2138926674
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +959,6 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1875990302}
   - {fileID: 317426583}
   - {fileID: 1238906215}
   - {fileID: 1868285015}

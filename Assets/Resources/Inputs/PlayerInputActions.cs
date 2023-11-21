@@ -98,6 +98,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""f290b622-bca4-404e-a5f9-1cd577397372"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a058fd50-78ee-4e0b-9f79-08e7dd176f55"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02dc305e-8998-40e0-9076-23e8266b42ac"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -365,9 +396,25 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Mobile"",
-            ""bindingGroup"": ""Mobile"",
-            ""devices"": []
+            ""name"": ""Windows"",
+            ""bindingGroup"": ""Windows"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -381,6 +428,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_UsePowerUp_4 = m_Player.FindAction("UsePowerUp_4", throwIfNotFound: true);
         m_Player_UsePowerUp_5 = m_Player.FindAction("UsePowerUp_5", throwIfNotFound: true);
         m_Player_MoveCorpse = m_Player.FindAction("MoveCorpse", throwIfNotFound: true);
+        m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -453,6 +501,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UsePowerUp_4;
     private readonly InputAction m_Player_UsePowerUp_5;
     private readonly InputAction m_Player_MoveCorpse;
+    private readonly InputAction m_Player_CameraMove;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -465,6 +514,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @UsePowerUp_4 => m_Wrapper.m_Player_UsePowerUp_4;
         public InputAction @UsePowerUp_5 => m_Wrapper.m_Player_UsePowerUp_5;
         public InputAction @MoveCorpse => m_Wrapper.m_Player_MoveCorpse;
+        public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +548,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveCorpse.started += instance.OnMoveCorpse;
             @MoveCorpse.performed += instance.OnMoveCorpse;
             @MoveCorpse.canceled += instance.OnMoveCorpse;
+            @CameraMove.started += instance.OnCameraMove;
+            @CameraMove.performed += instance.OnCameraMove;
+            @CameraMove.canceled += instance.OnCameraMove;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -526,6 +579,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveCorpse.started -= instance.OnMoveCorpse;
             @MoveCorpse.performed -= instance.OnMoveCorpse;
             @MoveCorpse.canceled -= instance.OnMoveCorpse;
+            @CameraMove.started -= instance.OnCameraMove;
+            @CameraMove.performed -= instance.OnCameraMove;
+            @CameraMove.canceled -= instance.OnCameraMove;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -589,13 +645,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
-    private int m_MobileSchemeIndex = -1;
-    public InputControlScheme MobileScheme
+    private int m_WindowsSchemeIndex = -1;
+    public InputControlScheme WindowsScheme
     {
         get
         {
-            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
-            return asset.controlSchemes[m_MobileSchemeIndex];
+            if (m_WindowsSchemeIndex == -1) m_WindowsSchemeIndex = asset.FindControlSchemeIndex("Windows");
+            return asset.controlSchemes[m_WindowsSchemeIndex];
         }
     }
     public interface IPlayerActions
@@ -608,6 +664,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnUsePowerUp_4(InputAction.CallbackContext context);
         void OnUsePowerUp_5(InputAction.CallbackContext context);
         void OnMoveCorpse(InputAction.CallbackContext context);
+        void OnCameraMove(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
