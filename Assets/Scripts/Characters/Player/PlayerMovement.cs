@@ -1,6 +1,8 @@
 using Nrjwolf.Tools.AttachAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,64 +13,49 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
 
+    [field: Header("- Autoattach propierties -")]
+    [field: SerializeField, GetComponent, ReadOnlyField] private Rigidbody rb { get; set; }
+
     [field: Header("Movement settings")]
-    [field: SerializeField] private float _speed { get; set; } = 5f;
-    [field: SerializeField] private float _jumpForce { get; set; } = 10f;
-    [field: SerializeField] private float _rotationSpeed { get; set; } = 100f;
-    [field: SerializeField] private Transform _groundCheck { get; set; }
-    [field: SerializeField] private LayerMask _groundLayer { get; set; }
-    [field: SerializeField, GetComponent, ReadOnlyField] private Rigidbody _rb { get; set; }
-    //[field: SerializeField] private Animator _animator { get; set; }
-    [field: SerializeField] private PlayerInputActions _inputActions { get; set; }
+    [field: SerializeField] private float moveSpeed { get; set; } = 6f;
+    [field: SerializeField] private float movementMultiplier { get; set; } = 10f;
 
-    private Vector2 _movementInput { get; set; }
-    private Vector2 _mouseDelta { get; set; }
-    [field: SerializeField, ReadOnlyField] private bool _isGrounded { get; set; }
+    private float horizontalMovement { get; set; }
+    private float verticalMovement { get; set; }
 
-    private bool lockMovement { get; set; } = false;
+    private float rbDrag { get; set; } = 6f;
+
+    private Vector3 moveDirection { get; set; }
 
     void Start() {
-        if (_rb == null)
-            _rb = GetComponent<Rigidbody>();
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
 
+        rb.freezeRotation = true;
     }
 
     void Update() {
-
-        // Check if the player is grounded
-        _isGrounded = Physics.CheckSphere(_groundCheck.position, 0.1f, _groundLayer);
-
-        // Jump using the button assigned in the Input Manager
-        /*if (_inputActions.Player.Jump.triggered && _isGrounded && !lockMovement) {
-            OnJump();
-        }*/
+        ControlDrag();
     }
 
     void FixedUpdate() {
-        // Mover al jugador
-        Move();
+        MovePlayer();
     }
 
-    void Move() {
-        Vector3 movement = new Vector3(_movementInput.x, 0f, _movementInput.y);
-        Vector3 moveDirection = transform.TransformDirection(-movement);
+    void OnMovement(InputValue value) {
+        Vector2 inputVector = value.Get<Vector2>();
+        horizontalMovement = inputVector.x;
+        verticalMovement = inputVector.y;
 
-        _rb.AddForce(moveDirection * _speed, ForceMode.VelocityChange);
-
-        // Rotate the player with mouse movement
-        transform.Rotate(Vector3.up * _mouseDelta.x * _rotationSpeed * Time.deltaTime);
+        moveDirection = transform.forward * verticalMovement + transform.right * horizontalMovement;
+        Debug.Log($"Move direction: {moveDirection}");
     }
 
-    void OnJump() {
-        _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+    void MovePlayer() {
+        rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
     }
 
-    public void OnMovement(InputValue value) {
-        _movementInput = value.Get<Vector2>();
-    }
-
-    void OnCameraMovement(InputValue value) {
-        // Rotate the player with mouse movement
-        Vector2 mouseDelta = value.Get<Vector2>();
+    void ControlDrag() {
+        rb.drag = rbDrag;
     }
 }

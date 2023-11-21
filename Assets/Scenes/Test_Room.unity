@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780176632}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -370,7 +370,7 @@ Transform:
   - {fileID: 493422190}
   - {fileID: 1875990302}
   m_Father: {fileID: 1316625538}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &780176634
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780176632}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -418,9 +418,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &780176636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,14 +433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f042eebab05d347bce6d4bf2797465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_speed>k__BackingField: 2
-  <_jumpForce>k__BackingField: 10
-  <_groundCheck>k__BackingField: {fileID: 493422190}
-  <_groundLayer>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 1
-  <_rb>k__BackingField: {fileID: 780176635}
-  <_isGrounded>k__BackingField: 0
+  <rb>k__BackingField: {fileID: 780176635}
+  <moveSpeed>k__BackingField: 6
+  <movementMultiplier>k__BackingField: 10
 --- !u!114 &780176637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,13 +812,13 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 243
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -843,13 +838,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875990299}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.965926, z: -0.2588186, w: 0}
-  m_LocalPosition: {x: 0, y: 1.933013, z: 2.2500005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 780176633}
-  m_LocalEulerAnglesHint: {x: 30, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138926674
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +857,7 @@ GameObject:
   - component: {fileID: 2138926678}
   - component: {fileID: 2138926677}
   - component: {fileID: 2138926676}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +873,7 @@ Transform:
   m_GameObject: {fileID: 2138926674}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.5}
   m_LocalScale: {x: 0.4, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
