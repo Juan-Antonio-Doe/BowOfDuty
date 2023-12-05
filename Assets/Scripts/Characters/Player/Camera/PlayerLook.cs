@@ -7,9 +7,11 @@ using UnityEngine.InputSystem;
 public class PlayerLook : MonoBehaviour {
 
     [field: Header("- Autoattach propierties -")]
-    [field: SerializeField, GetComponentInChildren, ReadOnlyField] private Camera cam { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private PlayerWallRun playerWallRun { get; set; }
 
     [field: Header("Camera settings")]
+    [field: SerializeField] private Transform cam { get; set; }
+    [field: SerializeField] private Transform orientation { get; set; }
     [field: SerializeField] private float sensX { get; set; } = 10f;
     [field: SerializeField] private float sensY { get; set; } = 10f;
     [field: SerializeField] private float multiplier { get; set; } = 0.01f;
@@ -23,8 +25,8 @@ public class PlayerLook : MonoBehaviour {
     Vector2 cameraInput { get; set; } = Vector2.zero;
 	
     void Start() {
-        if (cam == null)
-            cam = GetComponentInChildren<Camera>();
+        /*if (cam == null)
+            cam = GetComponentInChildren<Camera>();*/
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -51,7 +53,8 @@ public class PlayerLook : MonoBehaviour {
 
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, playerWallRun.Tilt);
+        orientation.transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 
     void PlayerRotation() {
