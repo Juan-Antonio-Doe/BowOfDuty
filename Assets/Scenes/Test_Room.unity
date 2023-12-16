@@ -221,6 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245195649}
+  - component: {fileID: 245195650}
   m_Layer: 0
   m_Name: __Enemies__
   m_TagString: Untagged
@@ -244,6 +245,19 @@ Transform:
   - {fileID: 1452934250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &245195650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245195648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940f7e4358cece24b8e00a6e0e8678a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <player>k__BackingField: {fileID: 780176637}
 --- !u!1 &317426581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,6 +1319,37 @@ Transform:
   - {fileID: 2037261737}
   m_Father: {fileID: 245195649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1650268547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650268548}
+  m_Layer: 8
+  m_Name: MoveForwardPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1650268548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650268547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2037261737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1673089890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2070,6 +2115,7 @@ Transform:
   m_Children:
   - {fileID: 979757128}
   - {fileID: 1678187964}
+  - {fileID: 1650268548}
   m_Father: {fileID: 1452934250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2037261738
@@ -2179,11 +2225,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8dee4181a26d7439b4ac118cab4663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <enemies>k__BackingField: {fileID: 245195650}
   <maxHealth>k__BackingField: 20
   <health>k__BackingField: 20
   <attackRange>k__BackingField: 10
   <attackCooldown>k__BackingField: 1
   <agent>k__BackingField: {fileID: 2037261741}
+  <moveSpeed>k__BackingField: 4
+  <moveForwardPoint>k__BackingField: {fileID: 1650268548}
   <arrowPrefab>k__BackingField: {fileID: 4690373880892028371, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
   <arrowSpawnPoint>k__BackingField: {fileID: 1678187964}
 --- !u!1 &2132463600
