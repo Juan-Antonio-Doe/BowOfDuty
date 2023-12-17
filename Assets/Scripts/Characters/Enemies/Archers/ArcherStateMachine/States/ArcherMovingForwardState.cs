@@ -1,4 +1,5 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 internal class ArcherMovingForwardState : ArcherState {
     public ArcherMovingForwardState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
@@ -11,7 +12,6 @@ internal class ArcherMovingForwardState : ArcherState {
 
     public override void Enter() {
 
-
         base.Enter();
     }
 
@@ -20,7 +20,7 @@ internal class ArcherMovingForwardState : ArcherState {
 
         CheckersOnUpdate();
 
-        agent.SetDestination(enemy.MoveForwardPoint.position);
+        agent.SetDestination(enemy.PlayerBase.position);
     }
 
     public override void Exit() { 
@@ -30,21 +30,6 @@ internal class ArcherMovingForwardState : ArcherState {
     }
 
     void CheckersOnUpdate() {
-        CheckPlayerDetected();
-        CheckNPCDetected();
-    } 
-
-    void CheckPlayerDetected() {
-        if (PlayerDetected()) {
-            //ChangeState(new ArcherAttackingPlayerState(enemy, agent));
-            return;
-        }
-    }
-
-    void CheckNPCDetected() {
-        if (NPCDetected()) {
-            //ChangeState(new ArcherAttackingNPCState(enemy, agent));
-            return;
-        }
+        CheckAllyDetected();
     }
 }

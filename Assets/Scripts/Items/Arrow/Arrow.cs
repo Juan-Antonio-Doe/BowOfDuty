@@ -22,11 +22,13 @@ public class Arrow : MonoBehaviour {
         if (other.CompareTag("Enemy")) {
             StickOnPoint(other.transform);
             other.GetComponent<EnemyArcher>().TakeDamage(damage);
+            return;
         }
 
         if (other.CompareTag("Player")) {
             StickOnPoint(other.transform);
             other.GetComponent<PlayerManager>().TakeDamage(damage);
+            return;
         }
     }
 

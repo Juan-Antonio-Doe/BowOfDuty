@@ -39,13 +39,13 @@ public class ArcherState {
     }
 
     public virtual void Enter() {
+        Debug.Log($"ArcherState: {npc.name} -> {currentState}");
         stage = STAGES.Update;
     }
 
     public virtual void Update() {
         if (enemy.IsDead) {
             ChangeState(new ArcherDeadState(enemy, agent));
-            stage = STAGES.Exit;
             return;
         }
 
@@ -79,7 +79,7 @@ public class ArcherState {
         stage = STAGES.Exit;
     }
 
-    public bool PlayerDetected() {
+    protected bool PlayerDetected() {
         //return enemy.enemies.PlayerDetected;
         if (Vector3.Distance(npc.transform.position, player.transform.position) < enemy.AttackRange) {
             return true;
@@ -87,7 +87,37 @@ public class ArcherState {
         return false;
     }
 
-    public bool NPCDetected() {
-        return enemy.AttackTarget != null;
+    protected bool TargetDetected() {
+        if (enemy.AttackTarget != null && enemy.AttackTarget.gameObject.activeInHierarchy) {
+            if (Vector3.Distance(npc.transform.position, enemy.AttackTarget.position) <= enemy.AttackRange) {
+                return true;
+            }
+        }
+
+        enemy.AttackTarget = null;
+        return false;
+    }
+
+    protected void CheckAllyDetected() {
+        if (TargetDetected()) {
+            if (enemy.AttackTarget.CompareTag("Player")) {
+                ChangeState(new ArcherAttackingPlayerState(enemy, agent));
+                return;
+            }
+            else if (enemy.AttackTarget.CompareTag("Ally")) {
+                ChangeState(new ArcherAttackingNPCState(enemy, agent));
+                return;
+            }
+            else if (enemy.AttackTarget.CompareTag("PlayerBase")) {
+                ChangeState(new ArcherAttackingBaseState(enemy, agent));
+                return;
+            }
+        }
+    }
+
+    protected void SmoothLookAt(Transform target) {
+        Vector3 direction = (target.position - npc.transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }

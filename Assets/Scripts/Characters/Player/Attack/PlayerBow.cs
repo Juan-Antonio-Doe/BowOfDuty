@@ -21,6 +21,10 @@ public class PlayerBow : MonoBehaviour {
         else if (isDrawing && Input.GetButtonUp("Fire1")) {
             ReleaseArrow();
         }
+
+        if (isDrawing) {
+            currentArrow.transform.rotation = Quaternion.LookRotation(playerCamera.transform.forward);
+        }
     }
 
     void StartDrawingBow() {

@@ -1,19 +1,23 @@
 using Nrjwolf.Tools.AttachAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyArcher : Enemy {
 
     [field: Header("Autoattach properties")]
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
+    [field: SerializeField, ReadOnlyField] protected Transform playerBase { get; set; }
+    public Transform PlayerBase { get => playerBase; }
+    [field: SerializeField, GetComponent, ReadOnlyField] protected EnemyBow bow { get; set; }
+    public EnemyBow Bow { get => bow; }
 
     [field: Header("Move settings")]
     [field: SerializeField] private float moveSpeed { get; set; } = 4f;
     public float MoveSpeed { get => moveSpeed; }
-    [field: SerializeField] private Transform moveForwardPoint { get; set; }
-    public Transform MoveForwardPoint { get => moveForwardPoint; }
 
     [field: Header("Attack settings")]
     [field: SerializeField] private GameObject arrowPrefab { get; set; }
@@ -23,19 +27,38 @@ public class EnemyArcher : Enemy {
     private ArcherState currentState { get; set; }
 
     private Transform attackTarget { get; set; }
-    public Transform AttackTarget { get => attackTarget; }
+    public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
 
-    private bool isDead { get; set; }
     public bool IsDead { get => isDead; }
 
+    void OnValidate() {
+#if UNITY_EDITOR
+        UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+        bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
+        bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
+        if (!isValidPrefabStage /*&& prefabConnected*/) {
+            // Variables that will only be checked when they are in a scene
+            if (!Application.isPlaying) {
+                if (playerBase == null)
+                    playerBase = GameObject.FindGameObjectWithTag("PlayerBase").transform;
+
+                if (healthText == null)
+                    healthText = healthBar.transform.GetChild(0).GetComponent<Text>();
+            }
+        }
+#endif
+    }
+
     void Start() {
-        currentState.ChangeState(new ArcherMovingForwardState(this, agent));
+        currentState = new ArcherMovingForwardState(this, agent);
     }
 
     void Update() {
+        currentState = currentState.Process();
+
         if (!isDead) {
             if (attackTarget != null) {
-                if (!attackTarget.gameObject.activeSelf) {
+                if (!attackTarget.gameObject.activeInHierarchy) {
                     attackTarget = null;
                 }
             }
@@ -52,10 +75,20 @@ public class EnemyArcher : Enemy {
         attackTarget = null; // Reset the attack target
 
         foreach (Collider collider in colliders) {
-            if (collider.gameObject != gameObject && collider.gameObject.activeSelf) {
+            if (collider.gameObject != gameObject && collider.gameObject.activeInHierarchy) {
                 attackTarget = collider.gameObject.transform;
                 return; // Stop the loop once the first valid target is found
             }
         }
+    }
+
+    protected override void Die() {
+        //base.Die();
+        isDead = true;
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

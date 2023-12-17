@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
     [field: Header("Player settings")]
-    [field: SerializeField] private float health { get; set; } = 100f;
+    [field: SerializeField, ReadOnlyField] private float health { get; set; } = 100f;
     [field: SerializeField] private float maxHealth { get; set; } = 100f;
 
     public void TakeDamage(float damage) {
@@ -16,6 +16,8 @@ public class PlayerManager : MonoBehaviour {
                 Die();
             }
         }
+
+        Debug.Log($"Player health: <color=green>{health}</color>");
     }
 
     private void Die() {
