@@ -4,43 +4,34 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ArcherState {
+public class ArcherState : NPCState {
 
-    public enum STATE {
+    /*public enum STATE {
         Idle,               // This is the paused state.
         MovingForward,      // Enemy is moving forward to the player's base.
         AttackingNPC,       // Enemy is attacking the player's allies.
         AttackingBase,      // Enemy is attacking the player's base.
         AttackingPlayer,    // Enemy is attacking the player.
         Dead                // Enemy is dead.
-    }
+    }*/
 
-    public enum STAGES {
-        Enter,
-        Update,
-        Exit
-    }
-
-    public STATE currentState { get; set; }
-    protected STAGES stage { get; set; }
-    protected GameObject npc { get; set; }  // The current enemy gameobject.
     protected EnemyArcher enemy { get; set; }
-    protected PlayerManager player { get; set; }
-    protected NavMeshAgent agent { get; set; }
     protected ArcherState nextState { get; set; }
 
     public ArcherState(EnemyArcher enemy, NavMeshAgent agent) {
 
-        this.npc = enemy.gameObject;
+        npc = enemy.gameObject;
         this.enemy = enemy;
         this.agent = agent;
-        this.player = enemy.enemies.Player;
+        player = enemy.enemies.Player;
         stage = STAGES.Enter;
     }
 
     public virtual void Enter() {
         Debug.Log($"ArcherState: {npc.name} -> {currentState}");
         stage = STAGES.Update;
+
+        //base.Enter();
     }
 
     public virtual void Update() {
@@ -48,11 +39,13 @@ public class ArcherState {
             ChangeState(new ArcherDeadState(enemy, agent));
             return;
         }
-
         stage = STAGES.Update;
+
+        //base.Update();
     }
 
     public virtual void Exit() {
+        //base.Exit();
         stage = STAGES.Exit;
     }
 
@@ -113,11 +106,5 @@ public class ArcherState {
                 return;
             }
         }
-    }
-
-    protected void SmoothLookAt(Transform target) {
-        Vector3 direction = (target.position - npc.transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }

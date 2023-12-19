@@ -8,4 +8,27 @@ internal class ArcherAttackingBaseState : ArcherState {
     public override void Enter() {
         base.Enter();
     }
+
+    public override void Update() {
+        base.Update();
+
+        if (!TargetDetected()) {
+            ChangeState(new ArcherMovingForwardState(enemy, agent));
+            return;
+        }
+
+        SmoothLookAt(enemy.AttackTarget);
+        //enemy.transform.LookAt(enemy.AttackTarget);
+
+        if (enemy.Bow.CanShoot()) {
+            enemy.Bow.Shoot();
+        }
+    }
+
+    public override void Exit() {
+        enemy.Bow.CancelAttack();
+
+        base.Exit();
+    }
+
 }

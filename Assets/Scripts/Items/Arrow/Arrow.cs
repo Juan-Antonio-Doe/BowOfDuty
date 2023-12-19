@@ -30,6 +30,12 @@ public class Arrow : MonoBehaviour {
             other.GetComponent<PlayerManager>().TakeDamage(damage);
             return;
         }
+
+        if (other.CompareTag("PlayerBase") || other.CompareTag("EnemyBase")) {
+            StickOnPoint(other.transform);
+            other.GetComponent<BaseHealthAlpha>().TakeDamage(damage);
+            return;
+        }
     }
 
     private void StickOnPoint(Transform parent) {
