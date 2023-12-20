@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour {
 
     [field: SerializeField] protected Image healthBar { get; set; }
     [field: SerializeField, ReadOnlyField] protected Text healthText { get; set; }
+    [field: SerializeField] protected GameObject enemyCanvasGO { get; set; }
 
     [field: SerializeField] protected float attackRange { get; set; } = 10f;
     public float AttackRange { get => attackRange; }
@@ -21,6 +22,7 @@ public abstract class Enemy : MonoBehaviour {
     public float AttackCooldown { get => attackCooldown; }
 
     protected bool isDead { get; set; }
+    public bool IsDead { get => isDead; }
 
     public virtual void TakeDamage(float damage) {
         if (health > 0) {

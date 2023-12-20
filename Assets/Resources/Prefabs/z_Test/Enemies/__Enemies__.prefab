@@ -138,11 +138,24 @@ PrefabInstance:
       propertyPath: <playerBase>k__BackingField
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8758101450355438376, guid: 1ffd2821759059348aec31748b09a563, type: 3}
+      propertyPath: <enemyCanvas>k__BackingField
+      value: 
+      objectReference: {fileID: 7205649229673718001}
+    - target: {fileID: 8758101450355438376, guid: 1ffd2821759059348aec31748b09a563, type: 3}
+      propertyPath: <revalidateProperties>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ffd2821759059348aec31748b09a563, type: 3}
+--- !u!223 &7205649229673718001 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 8779727295502364305, guid: 1ffd2821759059348aec31748b09a563, type: 3}
+  m_PrefabInstance: {fileID: 1884827608575430240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7547613664779210710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8257000387394945462, guid: 1ffd2821759059348aec31748b09a563, type: 3}

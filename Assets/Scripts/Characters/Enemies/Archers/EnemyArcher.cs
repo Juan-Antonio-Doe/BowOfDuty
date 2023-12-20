@@ -29,10 +29,11 @@ public class EnemyArcher : Enemy {
     [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
 
-    public bool IsDead { get => isDead; }
+    private float centerWidth { get; set; }
+    private float centerHeight { get; set; }
 
     void OnValidate() {
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
         bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
@@ -48,12 +49,22 @@ public class EnemyArcher : Enemy {
                     revalidateProperties = false;
                     healthText = healthBar.transform.GetChild(0).GetComponent<Text>();
                 }
+
+                if (enemyCanvasGO == null || revalidateProperties) {
+                    revalidateProperties = false;
+                    enemyCanvasGO = healthBar.gameObject.GetComponentInParent<Canvas>().gameObject;
+                }
             }
         }
-#endif
+
+    #endif
     }
 
     void Start() {
+        enemyCanvasGO.SetActive(false);
+        centerWidth = Screen.width / 2;
+        centerHeight = Screen.height / 2;
+
         currentState = new ArcherMovingForwardState(this, agent);
     }
 
@@ -71,6 +82,8 @@ public class EnemyArcher : Enemy {
                 CheckNearby();
             }
         }
+
+        ShowHideCanvas();
     }
 
     public void CheckNearby() {
@@ -89,6 +102,18 @@ public class EnemyArcher : Enemy {
     protected override void Die() {
         //base.Die();
         isDead = true;
+    }
+
+    void ShowHideCanvas() {
+        // Si el jugador está mirando al enemigo y la vida del enemigo no está completa
+        if (Camera.main.ScreenToWorldPoint(new Vector3(centerWidth, centerHeight, 0)) == transform.position && health < maxHealth) {
+            // Activar el canvas de salud
+            enemyCanvasGO.SetActive(true);
+        }
+        else if (enemyCanvasGO.activeInHierarchy) {
+            // Desactivar el canvas de salud
+            enemyCanvasGO.SetActive(false);
+        }
     }
 
     private void OnDrawGizmosSelected() {
