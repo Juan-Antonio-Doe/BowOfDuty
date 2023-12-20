@@ -11,7 +11,6 @@ internal class ArcherMovingForwardState : ArcherState {
     }
 
     public override void Enter() {
-
         base.Enter();
     }
 

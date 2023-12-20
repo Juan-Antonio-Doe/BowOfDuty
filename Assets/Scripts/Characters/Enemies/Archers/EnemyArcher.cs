@@ -14,19 +14,19 @@ public class EnemyArcher : Enemy {
     public Transform PlayerBase { get => playerBase; }
     [field: SerializeField, GetComponent, ReadOnlyField] protected EnemyBow bow { get; set; }
     public EnemyBow Bow { get => bow; }
+    [field: SerializeField] private bool revalidateProperties { get; set; } = false;
 
     [field: Header("Move settings")]
     [field: SerializeField] private float moveSpeed { get; set; } = 4f;
     public float MoveSpeed { get => moveSpeed; }
 
     [field: Header("Attack settings")]
-    [field: SerializeField] private GameObject arrowPrefab { get; set; }
-    [field: SerializeField] private Transform arrowSpawnPoint { get; set; }
     [field: SerializeField] private LayerMask targetMasks { get; set; }
 
     private ArcherState currentState { get; set; }
 
-    private Transform attackTarget { get; set; }
+    [field: Header("Debug")]
+    [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
 
     public bool IsDead { get => isDead; }
@@ -36,14 +36,18 @@ public class EnemyArcher : Enemy {
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
         bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
-        if (!isValidPrefabStage /*&& prefabConnected*/) {
+        if (!isValidPrefabStage && prefabConnected) {
             // Variables that will only be checked when they are in a scene
             if (!Application.isPlaying) {
-                if (playerBase == null)
-                    playerBase = GameObject.FindGameObjectWithTag("PlayerBase").transform;
+                if (playerBase == null || revalidateProperties) {
+                    revalidateProperties = false;
+                    playerBase = GameObject.FindGameObjectWithTag("PlayerBase").transform.GetChild(0);
+                }
 
-                if (healthText == null)
+                if (healthText == null || revalidateProperties) {
+                    revalidateProperties = false;
                     healthText = healthBar.transform.GetChild(0).GetComponent<Text>();
+                }
             }
         }
 #endif

@@ -74,15 +74,21 @@ public class ArcherState : NPCState {
 
     protected bool PlayerDetected() {
         //return enemy.enemies.PlayerDetected;
-        if (Vector3.Distance(npc.transform.position, player.transform.position) < enemy.AttackRange) {
+        float distanceSquared = (npc.transform.position - player.transform.position).sqrMagnitude;
+        if (distanceSquared <= enemy.AttackRange * enemy.AttackRange) {
             return true;
         }
+
+        /*if (Vector3.Distance(npc.transform.position, player.transform.position) < enemy.AttackRange) {
+            return true;
+        }*/
         return false;
     }
 
     protected bool TargetDetected() {
         if (enemy.AttackTarget != null && enemy.AttackTarget.gameObject.activeInHierarchy) {
-            if (Vector3.Distance(npc.transform.position, enemy.AttackTarget.position) <= enemy.AttackRange) {
+            float distanceSquared = (npc.transform.position - enemy.AttackTarget.position).sqrMagnitude;
+            if (distanceSquared <= enemy.AttackRange * enemy.AttackRange) {
                 return true;
             }
         }
