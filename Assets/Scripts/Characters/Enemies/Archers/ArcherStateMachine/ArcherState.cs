@@ -27,14 +27,15 @@ public class ArcherState : NPCState {
         stage = STAGES.Enter;
     }
 
-    public virtual void Enter() {
-        Debug.Log($"ArcherState: {npc.name} -> {currentState}");
+    public override void Enter() {
+        //Debug.Log($"ArcherState: {npc.name} -> {currentState}");
+        Debug.Log($"Enemy");
         stage = STAGES.Update;
 
         //base.Enter();
     }
 
-    public virtual void Update() {
+    public override void Update() {
         if (enemy.IsDead) {
             ChangeState(new ArcherDeadState(enemy, agent));
             return;
@@ -44,7 +45,7 @@ public class ArcherState : NPCState {
         //base.Update();
     }
 
-    public virtual void Exit() {
+    public override void Exit() {
         //base.Exit();
         stage = STAGES.Exit;
     }

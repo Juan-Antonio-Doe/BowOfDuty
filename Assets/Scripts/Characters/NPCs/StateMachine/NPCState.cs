@@ -26,8 +26,9 @@ public class NPCState {
     protected PlayerManager player { get; set; }
     protected NavMeshAgent agent { get; set; }
 
-    /*public virtual void Enter() {
-        Debug.Log($"ArcherState: {npc.name} -> {currentState}");
+    public virtual void Enter() {
+        //Debug.Log($"ArcherState: {npc.name} -> {currentState}");
+        Debug.Log($"NPC");
         stage = STAGES.Update;
     }
 
@@ -37,7 +38,7 @@ public class NPCState {
 
     public virtual void Exit() {
         stage = STAGES.Exit;
-    }*/
+    }
 
     protected void SmoothLookAt(Transform target) {
         Vector3 direction = (target.position - npc.transform.position).normalized;
