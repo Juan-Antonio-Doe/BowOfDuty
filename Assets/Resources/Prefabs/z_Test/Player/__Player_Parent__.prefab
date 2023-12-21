@@ -89,6 +89,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <health>k__BackingField: 100
   <maxHealth>k__BackingField: 100
+  <enemyLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &5349655229571412672
 MonoBehaviour:
   m_ObjectHideFlags: 0

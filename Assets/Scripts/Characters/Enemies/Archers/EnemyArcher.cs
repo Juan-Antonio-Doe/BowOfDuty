@@ -32,6 +32,8 @@ public class EnemyArcher : Enemy {
     private float centerWidth { get; set; }
     private float centerHeight { get; set; }
 
+    private Coroutine hideCanvasAfterTimeCo;
+
     void OnValidate() {
     #if UNITY_EDITOR
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
@@ -60,6 +62,16 @@ public class EnemyArcher : Enemy {
     #endif
     }
 
+    void OnEnable() {
+        // Suscribirse al evento cuando el objeto se activa
+        PlayerManager.OnPlayerLookAtEnemy += ShowHideCanvas;
+    }
+
+    void OnDisable() {
+        // Anular la suscripción al evento cuando el objeto se desactiva
+        PlayerManager.OnPlayerLookAtEnemy -= ShowHideCanvas;
+    }
+
     void Start() {
         enemyCanvasGO.SetActive(false);
         centerWidth = Screen.width / 2;
@@ -83,7 +95,11 @@ public class EnemyArcher : Enemy {
             }
         }
 
-        ShowHideCanvas();
+        // Si el jugador deja de mirar al enemigo y el canvas está activo
+        if (!isPlayerLookingAtEnemy && enemyCanvasGO.activeInHierarchy && !isHideCanvasCoActive) {
+            // Comenzar la cuenta atrás para ocultar el canvas
+            hideCanvasAfterTimeCo = StartCoroutine(HideCanvasAfterTimeCo(canvasDisplayTime));
+        }
     }
 
     public void CheckNearby() {
@@ -104,8 +120,9 @@ public class EnemyArcher : Enemy {
         isDead = true;
     }
 
-    void ShowHideCanvas() {
-        // Si el jugador está mirando al enemigo y la vida del enemigo no está completa
+    void ShowHideCanvas(Transform enemyTransform) {
+        // Firts attempt to show the canvas
+        /*// Si el jugador está mirando al enemigo y la vida del enemigo no está completa
         if (Camera.main.ScreenToWorldPoint(new Vector3(centerWidth, centerHeight, 0)) == transform.position && health < maxHealth) {
             // Activar el canvas de salud
             enemyCanvasGO.SetActive(true);
@@ -113,11 +130,50 @@ public class EnemyArcher : Enemy {
         else if (enemyCanvasGO.activeInHierarchy) {
             // Desactivar el canvas de salud
             enemyCanvasGO.SetActive(false);
+        }*/
+
+        // Si el jugador está mirando a este enemigo y la vida del enemigo no está completa
+        if (enemyTransform == transform && health < maxHealth) {
+            // Activar el canvas de salud
+            enemyCanvasGO.SetActive(true);
+            // Indicar que el jugador está mirando al enemigo
+            isPlayerLookingAtEnemy = true;
         }
+        /*else {  // No llega a llamarse.
+            // Indicar que el jugador no está mirando al enemigo
+            isPlayerLookingAtEnemy = false;
+        }*/
+
+        isPlayerLookingAtEnemy = false;
+    }
+
+    IEnumerator HideCanvasAfterTimeCo(float time) {
+        isHideCanvasCoActive = true;
+
+        // Esperar el tiempo especificado
+        yield return new WaitForSeconds(time);
+
+        // Desactivar el canvas de salud
+        enemyCanvasGO.SetActive(false);
+        isHideCanvasCoActive = false;
     }
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    private void OnBecameInvisible() {
+        if (!Application.isPlaying)
+            return;
+
+        if (enemyCanvasGO.activeInHierarchy) {
+            enemyCanvasGO.SetActive(false);
+
+            if (hideCanvasAfterTimeCo != null) {
+                StopCoroutine(hideCanvasAfterTimeCo);
+                isHideCanvasCoActive = false;
+            }
+        }
     }
 }

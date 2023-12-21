@@ -19,19 +19,22 @@ public class Arrow : MonoBehaviour {
             StickOnPoint(other.transform);
         }
 
-        if (other.CompareTag("Enemy")) {
+        // Compare if the arrow is an ally and the target is an enemy.
+        if (other.CompareTag("Enemy") && gameObject.layer == 10) {
             StickOnPoint(other.transform);
             other.GetComponent<EnemyArcher>().TakeDamage(damage);
             return;
         }
 
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && gameObject.layer == 11) {
             StickOnPoint(other.transform);
             other.GetComponent<PlayerManager>().TakeDamage(damage);
             return;
         }
 
-        if (other.CompareTag("PlayerBase") || other.CompareTag("EnemyBase")) {
+        if ((other.CompareTag("PlayerBase") && gameObject.layer == 11) || 
+            (other.CompareTag("EnemyBase") && gameObject.layer == 10)) {
+
             StickOnPoint(other.transform);
             other.GetComponent<BaseHealthAlpha>().TakeDamage(damage);
             return;

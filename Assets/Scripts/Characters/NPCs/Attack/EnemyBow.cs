@@ -12,7 +12,7 @@ public class EnemyBow : MonoBehaviour {
     [field: SerializeField] private Rigidbody arrowPrefab { get; set; }
     [field: SerializeField] private Transform arrowSpawnPoint { get; set; }
     [field: SerializeField] private float maxShootForce { get; set; } = 100f;
-    [field: SerializeField, Range(0, 2)] private float precision { get; set; } = 1f;
+    [field: SerializeField, Range(0, 4)] private float precision { get; set; } = 1f;
 
     private Rigidbody currentArrow { get; set; }
     private bool isDrawing { get; set; }
@@ -31,9 +31,9 @@ public class EnemyBow : MonoBehaviour {
 
     void StartDrawingBow() {
         currentArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(me.AttackTarget.position - transform.position));
-        if (gameObject.CompareTag("Enemy")) {
+        /*if (gameObject.CompareTag("Enemy")) {
             currentArrow.gameObject.layer = LayerMask.NameToLayer("ArrowEnemy");
-        }
+        }*/
         currentArrow.transform.parent = arrowSpawnPoint;
         isDrawing = true;
     }
@@ -61,6 +61,7 @@ public class EnemyBow : MonoBehaviour {
         Rigidbody arrowRigidbody = currentArrow;
         arrowRigidbody.isKinematic = false;
         //arrowRigidbody.AddForce((me.AttackTarget.position - transform.position).normalized * actualShootForce, ForceMode.Impulse);
+        diff.y += 0.5f; // To make the arrow go a little bit higher
         arrowRigidbody.AddForce(diff.normalized * actualShootForce, ForceMode.Impulse);
         arrowRigidbody.useGravity = true;
         isDrawing = false;

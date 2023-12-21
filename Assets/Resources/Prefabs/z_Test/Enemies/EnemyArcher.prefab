@@ -173,6 +173,7 @@ MonoBehaviour:
   <healthBar>k__BackingField: {fileID: 6583203749880653048}
   <healthText>k__BackingField: {fileID: 6505491078954265721}
   <enemyCanvasGO>k__BackingField: {fileID: 9154756947731593831}
+  <canvasDisplayTime>k__BackingField: 2
   <attackRange>k__BackingField: 10
   <attackCooldown>k__BackingField: 1
   <agent>k__BackingField: {fileID: 4389434555793215646}
@@ -197,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <me>k__BackingField: {fileID: 8758101450355438376}
-  <arrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
+  <arrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: 1321c9c6adb2a9849a86234dafd9c136, type: 3}
   <arrowSpawnPoint>k__BackingField: {fileID: 4333834536538561855}
   <maxShootForce>k__BackingField: 100
   <precision>k__BackingField: 2
