@@ -37,7 +37,7 @@ public class ArcherState : NPCState {
 
     public override void Update() {
         if (enemy.IsDead) {
-            ChangeState(new ArcherDeadState(enemy, agent));
+            ChangeState(new EnemyDeadState(enemy, agent));
             return;
         }
         stage = STAGES.Update;
@@ -101,15 +101,15 @@ public class ArcherState : NPCState {
     protected void CheckAllyDetected() {
         if (TargetDetected()) {
             if (enemy.AttackTarget.CompareTag("Player")) {
-                ChangeState(new ArcherAttackingPlayerState(enemy, agent));
+                ChangeState(new EnemyAttackingPlayerState(enemy, agent));
                 return;
             }
             else if (enemy.AttackTarget.CompareTag("Ally")) {
-                ChangeState(new ArcherAttackingNPCState(enemy, agent));
+                ChangeState(new EnemyAttackingNPCState(enemy, agent));
                 return;
             }
             else if (enemy.AttackTarget.CompareTag("PlayerBase")) {
-                ChangeState(new ArcherAttackingBaseState(enemy, agent));
+                ChangeState(new EnemyAttackingBaseState(enemy, agent));
                 return;
             }
         }

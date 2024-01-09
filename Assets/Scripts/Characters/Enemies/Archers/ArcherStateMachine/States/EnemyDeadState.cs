@@ -1,7 +1,7 @@
 ﻿using UnityEngine.AI;
 
-internal class ArcherDeadState : ArcherState {
-    public ArcherDeadState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
+internal class EnemyDeadState : ArcherState {
+    public EnemyDeadState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.Dead;
     }
 

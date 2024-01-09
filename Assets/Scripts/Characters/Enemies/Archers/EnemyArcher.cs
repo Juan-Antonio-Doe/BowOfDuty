@@ -77,7 +77,7 @@ public class EnemyArcher : Enemy {
         centerWidth = Screen.width / 2;
         centerHeight = Screen.height / 2;
 
-        currentState = new ArcherMovingForwardState(this, agent);
+        currentState = new EnemyMovingForwardState(this, agent);
     }
 
     void Update() {

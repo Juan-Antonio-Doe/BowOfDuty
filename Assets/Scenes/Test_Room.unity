@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -686,6 +686,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 426245184}
+  - component: {fileID: 426245190}
+  - component: {fileID: 426245189}
   - component: {fileID: 426245188}
   - component: {fileID: 426245187}
   - component: {fileID: 426245186}
@@ -809,6 +811,48 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
+--- !u!114 &426245189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426245183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd083f2f5f4bcae46af3159b0c052e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <me>k__BackingField: {fileID: 426245190}
+  <arrowPrefab>k__BackingField: {fileID: 0}
+  <arrowSpawnPoint>k__BackingField: {fileID: 0}
+  <maxShootForce>k__BackingField: 100
+  <precision>k__BackingField: 1
+--- !u!114 &426245190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426245183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcedc33dfd180f49b68af9058c78660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <maxHealth>k__BackingField: 20
+  <health>k__BackingField: 20
+  <attackRange>k__BackingField: 10
+  <attackCooldown>k__BackingField: 1
+  <agent>k__BackingField: {fileID: 426245188}
+  <enemyBase>k__BackingField: {fileID: 0}
+  <bow>k__BackingField: {fileID: 426245189}
+  <revalidateProperties>k__BackingField: 0
+  <moveSpeed>k__BackingField: 4
+  <targetMasks>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
+  <attackTarget>k__BackingField: {fileID: 0}
 --- !u!114 &441562785 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
@@ -1645,13 +1689,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254183309}
+  - component: {fileID: 1254183310}
   m_Layer: 0
   m_Name: __Allies__
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1254183309
 Transform:
   m_ObjectHideFlags: 0
@@ -1668,6 +1713,18 @@ Transform:
   - {fileID: 384325452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1254183310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254183307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a3b2cead9991e42925f8299642c908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1391569589
 GameObject:
   m_ObjectHideFlags: 0

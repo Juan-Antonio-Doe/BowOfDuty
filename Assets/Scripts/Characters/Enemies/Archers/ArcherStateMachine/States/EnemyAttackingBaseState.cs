@@ -1,7 +1,7 @@
 ﻿using UnityEngine.AI;
 
-internal class ArcherAttackingBaseState : ArcherState {
-    public ArcherAttackingBaseState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
+internal class EnemyAttackingBaseState : ArcherState {
+    public EnemyAttackingBaseState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.AttackingBase;
     }
 
@@ -13,7 +13,7 @@ internal class ArcherAttackingBaseState : ArcherState {
         base.Update();
 
         if (!TargetDetected()) {
-            ChangeState(new ArcherMovingForwardState(enemy, agent));
+            ChangeState(new EnemyMovingForwardState(enemy, agent));
             return;
         }
 

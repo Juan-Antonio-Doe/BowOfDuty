@@ -1,7 +1,7 @@
 ﻿using UnityEngine.AI;
 
-internal class ArcherAttackingNPCState : ArcherState {
-    public ArcherAttackingNPCState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
+internal class EnemyAttackingNPCState : ArcherState {
+    public EnemyAttackingNPCState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.AttackingNPC;
     }
 
@@ -14,7 +14,7 @@ internal class ArcherAttackingNPCState : ArcherState {
         base.Update();
 
         if (!TargetDetected() || !enemy.AttackTarget.CompareTag("Ally")) {
-            ChangeState(new ArcherMovingForwardState(enemy, agent));
+            ChangeState(new EnemyMovingForwardState(enemy, agent));
             return;
         }
 

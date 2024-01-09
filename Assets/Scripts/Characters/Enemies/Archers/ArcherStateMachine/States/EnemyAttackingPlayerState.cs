@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-internal class ArcherAttackingPlayerState : ArcherState {
+internal class EnemyAttackingPlayerState : ArcherState {
 
-    public ArcherAttackingPlayerState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
+    public EnemyAttackingPlayerState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.AttackingPlayer;
 
         agent.speed = enemy.MoveSpeed / 1.5f;
@@ -18,7 +18,7 @@ internal class ArcherAttackingPlayerState : ArcherState {
         base.Update();
 
         if (!TargetDetected()) {
-            ChangeState(new ArcherMovingForwardState(enemy, agent));
+            ChangeState(new EnemyMovingForwardState(enemy, agent));
             return;
         }
 

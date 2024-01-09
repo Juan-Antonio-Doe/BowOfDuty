@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-internal class ArcherMovingForwardState : ArcherState {
-    public ArcherMovingForwardState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
+internal class EnemyMovingForwardState : ArcherState {
+    public EnemyMovingForwardState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.MovingForward;
 
         agent.speed = enemy.MoveSpeed;
