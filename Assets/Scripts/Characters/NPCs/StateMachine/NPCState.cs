@@ -28,7 +28,7 @@ public class NPCState {
 
     public virtual void Enter() {
         //Debug.Log($"ArcherState: {npc.name} -> {currentState}");
-        Debug.Log($"NPC");
+        //Debug.Log($"NPC");
         stage = STAGES.Update;
     }
 

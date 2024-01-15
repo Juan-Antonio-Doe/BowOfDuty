@@ -1,6 +1,6 @@
 ﻿using UnityEngine.AI;
 
-internal class EnemyAttackingBaseState : ArcherState {
+internal class EnemyAttackingBaseState : EnemyArcherState {
     public EnemyAttackingBaseState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.AttackingBase;
     }

@@ -69,6 +69,7 @@ public class AllyBow : MonoBehaviour {
     }
 
     public bool CanShoot() {
+        //Debug.Log($"CanShoot: InCooldown: {!inCooldown} | IsDrawing: {!isDrawing} | AttackTarget: {me.AttackTarget != null}");
         return !inCooldown && !isDrawing && me.AttackTarget != null;
     }
 

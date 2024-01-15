@@ -23,7 +23,7 @@ public class EnemyArcher : Enemy {
     [field: Header("Attack settings")]
     [field: SerializeField] private LayerMask targetMasks { get; set; }
 
-    private ArcherState currentState { get; set; }
+    private EnemyArcherState currentState { get; set; }
 
     [field: Header("Debug")]
     [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
@@ -73,6 +73,8 @@ public class EnemyArcher : Enemy {
     }
 
     void Start() {
+        health = maxHealth;
+
         enemyCanvasGO.SetActive(false);
         centerWidth = Screen.width / 2;
         centerHeight = Screen.height / 2;

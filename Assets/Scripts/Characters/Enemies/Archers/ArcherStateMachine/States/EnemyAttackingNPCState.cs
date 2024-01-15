@@ -1,6 +1,6 @@
 ﻿using UnityEngine.AI;
 
-internal class EnemyAttackingNPCState : ArcherState {
+internal class EnemyAttackingNPCState : EnemyArcherState {
     public EnemyAttackingNPCState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.AttackingNPC;
     }
@@ -19,9 +19,15 @@ internal class EnemyAttackingNPCState : ArcherState {
         }
 
         SmoothLookAt(enemy.AttackTarget);
+
+        if (enemy.Bow.CanShoot()) {
+            enemy.Bow.Shoot();
+        }
     }
 
     public override void Exit() {
+        enemy.Bow.CancelAttack();
+
         base.Exit();
     }
 }

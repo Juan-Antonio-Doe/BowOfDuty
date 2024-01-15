@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ArcherState : NPCState {
+public class EnemyArcherState : NPCState {
 
     /*public enum STATE {
         Idle,               // This is the paused state.
@@ -16,9 +15,9 @@ public class ArcherState : NPCState {
     }*/
 
     protected EnemyArcher enemy { get; set; }
-    protected ArcherState nextState { get; set; }
+    protected EnemyArcherState nextState { get; set; }
 
-    public ArcherState(EnemyArcher enemy, NavMeshAgent agent) {
+    public EnemyArcherState(EnemyArcher enemy, NavMeshAgent agent) {
 
         npc = enemy.gameObject;
         this.enemy = enemy;
@@ -29,7 +28,6 @@ public class ArcherState : NPCState {
 
     public override void Enter() {
         //Debug.Log($"ArcherState: {npc.name} -> {currentState}");
-        Debug.Log($"Enemy");
         stage = STAGES.Update;
 
         //base.Enter();
@@ -53,7 +51,7 @@ public class ArcherState : NPCState {
     /// <summary>
     /// This method is used to switch between the different methods that change the state.
     /// </summary>
-    public ArcherState Process() {
+    public EnemyArcherState Process() {
         if (stage == STAGES.Enter) Enter();
         if (stage == STAGES.Update) Update();
         if (stage == STAGES.Exit) {
@@ -68,7 +66,7 @@ public class ArcherState : NPCState {
     /// <summary>
     /// Changes the state of the enemy.
     /// </summary>
-    public void ChangeState(ArcherState nextState) {
+    public void ChangeState(EnemyArcherState nextState) {
         this.nextState = nextState;
         stage = STAGES.Exit;
     }

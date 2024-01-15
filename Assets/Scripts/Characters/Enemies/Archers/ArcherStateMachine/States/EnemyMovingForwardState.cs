@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-internal class EnemyMovingForwardState : ArcherState {
+internal class EnemyMovingForwardState : EnemyArcherState {
     public EnemyMovingForwardState(EnemyArcher enemy, NavMeshAgent agent) : base(enemy, agent) {
         currentState = STATE.MovingForward;
 
