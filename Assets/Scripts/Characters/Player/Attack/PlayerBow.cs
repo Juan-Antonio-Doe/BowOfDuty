@@ -15,6 +15,9 @@ public class PlayerBow : MonoBehaviour {
     private float drawStartTime { get; set; }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         if (Input.GetButtonDown("Fire1")) {
             StartDrawingBow();
         }

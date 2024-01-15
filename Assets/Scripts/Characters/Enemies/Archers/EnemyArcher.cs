@@ -83,6 +83,9 @@ public class EnemyArcher : Enemy {
     }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         currentState = currentState.Process();
 
         if (!isDead) {

@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b88a0473fe4a7d4f8c9615d73f9c2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <levelManager>k__BackingField: {fileID: 743179693}
   <maxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <isEnemyBase>k__BackingField: 0
@@ -1295,6 +1296,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659748426}
   m_CullTransparentMesh: 1
+--- !u!1 &743179691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 743179692}
+  - component: {fileID: 743179693}
+  m_Layer: 0
+  m_Name: __LevelManagers__
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &743179692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743179691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &743179693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743179691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d839366517ff3134dadb2570580b8f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <isLevelOnGoingDebug>k__BackingField: 0
 --- !u!114 &756750820 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 632646611326842880, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
@@ -2020,6 +2066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b88a0473fe4a7d4f8c9615d73f9c2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <levelManager>k__BackingField: {fileID: 743179693}
   <maxHealth>k__BackingField: 50
   <currentHealth>k__BackingField: 0
   <isEnemyBase>k__BackingField: 1
@@ -3091,6 +3138,7 @@ SceneRoots:
   - {fileID: 1734677158}
   - {fileID: 317426583}
   - {fileID: 1238906215}
+  - {fileID: 743179692}
   - {fileID: 647289369}
   - {fileID: 4488209856225549975}
   - {fileID: 8851182291383936331}

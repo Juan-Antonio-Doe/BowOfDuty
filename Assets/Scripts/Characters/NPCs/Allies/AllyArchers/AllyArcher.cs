@@ -58,6 +58,9 @@ public class AllyArcher : NPC {
     }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         currentState = currentState.Process();
         meStateNow = currentState.currentState;
 

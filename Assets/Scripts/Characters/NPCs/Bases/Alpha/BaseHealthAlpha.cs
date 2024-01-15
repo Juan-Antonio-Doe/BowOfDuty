@@ -1,3 +1,4 @@
+using Nrjwolf.Tools.AttachAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,7 +7,8 @@ using UnityEngine.UI;
 
 public class BaseHealthAlpha : MonoBehaviour {
 
-    //[field: Header("Autoattach properties")]
+    [field: Header("Autoattach properties")]
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] protected LevelManager levelManager { get; set; }
 
     [field: Header("Base properties")]
     [field: SerializeField] private float maxHealth { get; set; } = 100f;
@@ -65,6 +67,7 @@ public class BaseHealthAlpha : MonoBehaviour {
             winnerText.text = $"{winner} <color=red>Enemy</color>"; 
         }
 
+        levelManager.EndLevel();
     }
 
     void UpdateUI() {

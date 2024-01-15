@@ -29,6 +29,9 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         if (!isDead) {
             CheckEnemyInFront();
         }

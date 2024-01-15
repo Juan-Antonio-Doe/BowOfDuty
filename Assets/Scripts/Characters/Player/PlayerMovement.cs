@@ -70,12 +70,18 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         ControlDrag();
         ControlSpeed();
         IsGrounded();
     }
 
     void FixedUpdate() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         MovePlayer();
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -90,6 +96,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnJump() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         if (isGrounded)
             Jump();
     }
