@@ -60,6 +60,13 @@ public class Ghost : NPC {
         }
     }
 
+
+    protected override void Die() {
+        base.Die();
+
+        ghostsManager.levelManager.GhostsRefunned++;
+    }
+
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, takeCoverDistance);

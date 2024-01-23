@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 380747656}
   - component: {fileID: 380747655}
   - component: {fileID: 380747654}
+  - component: {fileID: 380747659}
   m_Layer: 8
   m_Name: Ghost
   m_TagString: Ghost
@@ -806,6 +807,33 @@ MonoBehaviour:
   coverFactor: -0.1
   timeTakingCover: 5
   <playerTarget>k__BackingField: {fileID: 0}
+--- !u!54 &380747659
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380747652}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1216
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2871
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &384325451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 780176637}
+  <levelManager>k__BackingField: {fileID: 743179693}
 --- !u!114 &623064524 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 632646611326842880, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}

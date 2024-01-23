@@ -167,15 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8dee4181a26d7439b4ac118cab4663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <enemies>k__BackingField: {fileID: 0}
   <maxHealth>k__BackingField: 20
   <health>k__BackingField: 20
+  <attackRange>k__BackingField: 10
+  <attackCooldown>k__BackingField: 1
+  <enemies>k__BackingField: {fileID: 0}
   <healthBar>k__BackingField: {fileID: 6583203749880653048}
   <healthText>k__BackingField: {fileID: 6505491078954265721}
   <enemyCanvasGO>k__BackingField: {fileID: 9154756947731593831}
-  <canvasDisplayTime>k__BackingField: 2
-  <attackRange>k__BackingField: 10
-  <attackCooldown>k__BackingField: 1
+  <canvasDisplayTime>k__BackingField: 1
   <agent>k__BackingField: {fileID: 4389434555793215646}
   <playerBase>k__BackingField: {fileID: 0}
   <bow>k__BackingField: {fileID: 6112309546542241209}
