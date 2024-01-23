@@ -26,6 +26,13 @@ public class Arrow : MonoBehaviour {
             return;
         }
 
+        // Compare if the target is a Ghost and the arrow is an ally.
+        if (other.CompareTag("Ghost") && gameObject.layer == 10) {
+            StickOnPoint(other.transform);
+            other.GetComponent<Ghost>().TakeDamage(damage);
+            return;
+        }
+
         // Compare if the target is an ally and the arrow is an enemy.
         if (other.CompareTag("Ally") && gameObject.layer == 11) {
             StickOnPoint(other.transform);

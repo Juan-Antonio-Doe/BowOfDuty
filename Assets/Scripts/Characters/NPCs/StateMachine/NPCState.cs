@@ -7,11 +7,14 @@ public class NPCState {
 
     public enum STATE {
         Idle,               // This is the paused state.
-        MovingForward,      // Enemy is moving forward to the player's base.
-        AttackingNPC,       // Enemy is attacking the player's allies.
-        AttackingBase,      // Enemy is attacking the player's base.
+        MovingForward,      // NPC is moving forward to the player's base.
+        AttackingNPC,       // NPC is attacking the other NPC.
+        AttackingBase,      // NPC is attacking the other NPC's base.
         AttackingPlayer,    // Enemy is attacking the player.
-        Dead                // Enemy is dead.
+        Wander,             // Ghost is wandering around.
+        TakeCover,          // Ghost is taking cover.
+        RunAway,            // Ghost is running away.
+        Dead                // NPC is dead.
     }
 
     public enum STAGES {

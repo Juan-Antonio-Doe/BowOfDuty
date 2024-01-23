@@ -12,6 +12,7 @@ TagManager:
   - EnemyRespawnPoint
   - AllyRespawnPoint
   - DeathRespawnPoint
+  - Ghost
   layers:
   - Default
   - TransparentFX
