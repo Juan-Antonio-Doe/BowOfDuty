@@ -6,6 +6,7 @@ internal class GhostRunAwayState : GhostState {
     private float agentDoubledHeight { get; set; }
 
     private bool isRunningAway { get; set; }
+    private int runAwayCount { get; set; }
 
     private float originalSpeed { get; set; }
 
@@ -55,8 +56,13 @@ internal class GhostRunAwayState : GhostState {
         if (NavMesh.SamplePosition(ghost.transform.position + (_dirToPlayer * ghost.RunAwayDistance),
             out NavMeshHit _hit, agentDoubledHeight, NavMesh.AllAreas)) {
             agent.SetDestination(_hit.position);
+            runAwayCount = 0;
+        }
+        else if (runAwayCount > 20) {
+            return;
         }
         else {
+            runAwayCount++;
             RunAway();
         }
     }

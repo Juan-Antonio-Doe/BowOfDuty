@@ -37,8 +37,24 @@ public class Ghost : NPC {
     private GhostState currentState { get; set; }
 
     [field: Header("Debug")]
+    [field: SerializeField, ReadOnlyField] private NPCState.STATE meStateNow { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform playerTarget { get; set; }
     public Transform PlayerTarget { get => playerTarget; set => playerTarget = value; }
+
+    private bool isStarted { get; set; }
+
+    void OnEnable() {
+        if (!isStarted) return;
+
+        health = maxHealth;
+        isDead = false;
+
+        currentState = new GhostWanderState(this, agent);
+    }
+
+    void OnDisable() {
+        agent.ResetPath();
+    }
 
     void Start() {
         health = maxHealth;
@@ -46,7 +62,12 @@ public class Ghost : NPC {
         if (checkFrontOrigin == null)
             checkFrontOrigin = transform;
 
+        if (ghostsManager == null)
+            ghostsManager = FindObjectOfType<GhostsManager>();
+
         currentState = new GhostWanderState(this, agent);
+
+        isStarted = true;
     }
 
     void Update() {
@@ -54,17 +75,14 @@ public class Ghost : NPC {
             return;
 
         currentState = currentState.Process();
-
-        if (!isDead) {
-            
-        }
+        meStateNow = currentState.currentState;
     }
 
 
     protected override void Die() {
         base.Die();
 
-        ghostsManager.levelManager.GhostsRefunned++;
+        ghostsManager.levelManager.GhostsRekilled++;
     }
 
     private void OnDrawGizmosSelected() {

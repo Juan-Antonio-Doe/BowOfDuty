@@ -28,6 +28,8 @@ public class NPCState {
     protected GameObject npc { get; set; }  // The current character gameobject.
     protected PlayerManager player { get; set; }
     protected NavMeshAgent agent { get; set; }
+    protected bool isAlreadyDead { get; set; }
+
 
     public virtual void Enter() {
         //Debug.Log($"ArcherState: {npc.name} -> {currentState}");

@@ -25,7 +25,7 @@ public class GhostState : NPCState {
     }
 
     public override void Update() {
-        if (ghost.IsDead) {
+        if (ghost.IsDead && !isAlreadyDead) {
             ChangeState(new GhostDeadState(ghost, agent));
             return;
         }

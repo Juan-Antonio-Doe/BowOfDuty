@@ -7,9 +7,24 @@ internal class GhostDeadState : GhostState {
     }
 
     public override void Enter() {
+        isAlreadyDead = true;
         agent.isStopped = true;
         agent.ResetPath();
 
         base.Enter();
+    }
+
+    /*public override void Update() {
+        base.Update();
+
+        if (!ghost.IsDead) {
+            ChangeState(new GhostWanderState(ghost, agent));
+        }
+    }*/
+
+    public override void Exit() {
+        isAlreadyDead = false;
+
+        base.Exit();
     }
 }

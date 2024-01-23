@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -16,6 +17,9 @@ public class PlayerManager : MonoBehaviour {
     [field: SerializeField] private float maxHealth { get; set; } = 100f;
     [field: SerializeField] private float enemyRayCastDistance { get; set; } = 60f;
     [field: SerializeField] private LayerMask enemyLayer { get; set; } = 1 << 8;
+
+    [field: Header("Death")]
+    [field: SerializeField] private UnityEvent onDeadEvent { get; set; }
 
     private bool isDead { get; set; }
     public bool IsDead { get => isDead; }
@@ -84,6 +88,7 @@ public class PlayerManager : MonoBehaviour {
     void Die() {
         isDead = true;
         TeleportToDeathPrision();
+        onDeadEvent?.Invoke();
     }
 
     void CheckEnemyInFront() {
