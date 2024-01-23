@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    [field: Header("- Autoattach propierties -")]
+    [field: SerializeField, ReadOnlyField] private Transform deathRespawnPoint { get; set; }
+    [field: SerializeField, ReadOnlyField] private Transform playerRespawnPoint { get; set; }
+    [field: SerializeField] private bool revalidateProperties { get; set; } = false;
+
     [field: Header("Player settings")]
     [field: SerializeField, ReadOnlyField] private float health { get; set; } = 100f;
     [field: SerializeField] private float maxHealth { get; set; } = 100f;
@@ -20,6 +25,34 @@ public class PlayerManager : MonoBehaviour {
 
     private float centerWidth { get; set; }
     private float centerHeight { get; set; }
+
+    void OnValidate() {
+#if UNITY_EDITOR
+        UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+        bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
+        bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
+        if (!isValidPrefabStage && prefabConnected) {
+            // Variables that will only be checked when they are in a scene
+            if (!Application.isPlaying) {
+                if (revalidateProperties)
+                    ValidateProperties();
+            }
+        }
+
+#endif
+    }
+
+    void ValidateProperties() {
+        if (deathRespawnPoint == null || revalidateProperties) {
+            deathRespawnPoint = GameObject.FindGameObjectWithTag("DeathRespawnPoint").transform;
+        }
+        if (playerRespawnPoint == null || revalidateProperties) {
+            playerRespawnPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+        }
+
+        revalidateProperties = false;
+    }
+
 
     void Start() {
         centerWidth = Screen.width / 2;
@@ -48,8 +81,9 @@ public class PlayerManager : MonoBehaviour {
         Debug.Log($"Player health: <color=green>{health}</color>");
     }
 
-    private void Die() {
+    void Die() {
         isDead = true;
+        TeleportToDeathPrision();
     }
 
     void CheckEnemyInFront() {
@@ -64,5 +98,16 @@ public class PlayerManager : MonoBehaviour {
             // Si el raycast golpea a un enemigo, disparar el evento
             OnPlayerLookAtEnemy?.Invoke(hit.transform);
         }
+    }
+
+    void TeleportToDeathPrision() {
+        // ToDo: Apply death shader.
+        transform.position = deathRespawnPoint.position;
+    }
+
+    public void ResurrectPlayer() {
+        transform.position = playerRespawnPoint.position;
+        health = maxHealth;
+        isDead = false;
     }
 }

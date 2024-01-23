@@ -9,6 +9,9 @@ TagManager:
   - Ally
   - PlayerBase
   - EnemyBase
+  - EnemyRespawnPoint
+  - AllyRespawnPoint
+  - DeathRespawnPoint
   layers:
   - Default
   - TransparentFX

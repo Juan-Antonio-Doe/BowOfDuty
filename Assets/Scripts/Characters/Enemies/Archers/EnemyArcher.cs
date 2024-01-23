@@ -29,9 +29,6 @@ public class EnemyArcher : Enemy {
     [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
 
-    private float centerWidth { get; set; }
-    private float centerHeight { get; set; }
-
     private Coroutine hideCanvasAfterTimeCo;
 
     void OnValidate() {
@@ -76,8 +73,6 @@ public class EnemyArcher : Enemy {
         health = maxHealth;
 
         enemyCanvasGO.SetActive(false);
-        centerWidth = Screen.width / 2;
-        centerHeight = Screen.height / 2;
 
         currentState = new EnemyMovingForwardState(this, agent);
     }

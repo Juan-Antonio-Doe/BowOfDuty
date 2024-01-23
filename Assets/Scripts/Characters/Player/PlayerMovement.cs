@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour {
     [field: SerializeField] private float sprintSpeed { get; set; } = 6f;
     [field: SerializeField] private float acceleration { get; set; } = 10f;
     [field: SerializeField, ReadOnlyField] private bool isSprinting { get; set; }
+    [field: SerializeField] private float sprintStaminaMax { get; set; } = 100f;
+    private float sprintStamina { get; set; } = 100f;
 
     [field: Header("Jump settings")]
     [field: SerializeField] private float airMovementMultiplier { get; set; } = 2.35f;
@@ -67,6 +69,7 @@ public class PlayerMovement : MonoBehaviour {
 
         playerHeight = playerCollider.height;
         halfPlayerHeight = playerHeight / 2f;
+        sprintStamina = sprintStaminaMax;
     }
 
     void Update() {
@@ -133,14 +136,19 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void ControlSpeed() {
-        if (isSprinting && isGrounded) {
+        if (isSprinting && isGrounded && sprintStamina > 0) {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            sprintStamina -= 10f * Time.deltaTime;
         }
         else if (playerWallRun.WallLeft || playerWallRun.WallRight) {
             moveSpeed = sprintSpeed * 1.5f;
         }
         else {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+        }
+
+        if (!isSprinting && sprintStamina < sprintStaminaMax) {
+            sprintStamina += 10f * Time.deltaTime;
         }
     }
 
