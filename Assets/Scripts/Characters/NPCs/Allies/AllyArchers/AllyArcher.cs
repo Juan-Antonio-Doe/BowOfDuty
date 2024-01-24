@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class AllyArcher : NPC {
 
     [field: Header("Autoattach properties")]
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private AlliesManager alliesManager { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
     [field: SerializeField, ReadOnlyField] protected Transform enemyBase { get; set; }
     public Transform EnemyBase { get => enemyBase; }
@@ -29,12 +30,14 @@ public class AllyArcher : NPC {
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
     [field: SerializeField, ReadOnlyField] private AllyArcherState.STATE meStateNow { get; set; }
 
+    private bool isStarted { get; set; }
+
     void OnValidate() {
 #if UNITY_EDITOR
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
         bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
-        if (!isValidPrefabStage/* && prefabConnected*/) {
+        if (!isValidPrefabStage && prefabConnected) {
             // Variables that will only be checked when they are in a scene
             if (!Application.isPlaying) {
                 if (revalidateProperties)
@@ -51,10 +54,23 @@ public class AllyArcher : NPC {
         revalidateProperties = false;
     }
 
+    void OnEnable() {
+        if (!isStarted)
+            return;
+
+        currentState = new AllyMovingForwardState(this, agent);
+    }
+
+    void OnDisable() {
+        ResetAlly();
+    }
+
     void Start() {
         health = maxHealth;
 
         currentState = new AllyMovingForwardState(this, agent);
+
+        isStarted = true;
     }
 
     void Update() {
@@ -88,6 +104,14 @@ public class AllyArcher : NPC {
                 return; // Stop the loop once the first valid target is found
             }
         }
+    }
+
+    void ResetAlly() {
+        attackTarget = null;
+        health = maxHealth;
+        isDead = false;
+
+        alliesManager.MoveAllyToRandomSpawn(transform);
     }
 
     private void OnDrawGizmosSelected() {

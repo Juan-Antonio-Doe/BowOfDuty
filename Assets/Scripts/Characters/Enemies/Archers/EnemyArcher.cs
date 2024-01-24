@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class EnemyArcher : Enemy {
 
     [field: Header("Autoattach properties")]
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
     [field: SerializeField, ReadOnlyField] protected Transform playerBase { get; set; }
     public Transform PlayerBase { get => playerBase; }
@@ -30,6 +31,7 @@ public class EnemyArcher : Enemy {
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
 
     private Coroutine hideCanvasAfterTimeCo;
+    private bool isStarted { get; set; }
 
     void OnValidate() {
     #if UNITY_EDITOR
@@ -62,11 +64,18 @@ public class EnemyArcher : Enemy {
     void OnEnable() {
         // Suscribirse al evento cuando el objeto se activa
         PlayerManager.OnPlayerLookAtEnemy += ShowHideCanvas;
+
+        if (!isStarted)
+            return;
+
+        currentState = new EnemyMovingForwardState(this, agent);
     }
 
     void OnDisable() {
         // Anular la suscripción al evento cuando el objeto se desactiva
         PlayerManager.OnPlayerLookAtEnemy -= ShowHideCanvas;
+
+        ResetEnemy();
     }
 
     void Start() {
@@ -156,6 +165,23 @@ public class EnemyArcher : Enemy {
         // Desactivar el canvas de salud
         enemyCanvasGO.SetActive(false);
         isHideCanvasCoActive = false;
+    }
+
+    void ResetEnemy() {
+        if (hideCanvasAfterTimeCo != null) {
+            StopCoroutine(hideCanvasAfterTimeCo);
+            isHideCanvasCoActive = false;
+        }
+
+        if (enemyCanvasGO.activeInHierarchy) {
+            enemyCanvasGO.SetActive(false);
+        }
+
+        attackTarget = null;
+        health = maxHealth;
+        isDead = false;
+
+        enemiesManager.MoveEnemyToRandomSpawn(transform);
     }
 
     private void OnDrawGizmosSelected() {

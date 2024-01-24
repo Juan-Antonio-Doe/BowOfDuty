@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8257000387394945462}
   - component: {fileID: 8758101450355438376}
   - component: {fileID: 6112309546542241209}
+  - component: {fileID: 7874213164029583881}
   - component: {fileID: 4389434555793215646}
   - component: {fileID: 7982428381472562886}
   - component: {fileID: 2927048211546265972}
@@ -176,6 +177,7 @@ MonoBehaviour:
   <healthText>k__BackingField: {fileID: 6505491078954265721}
   <enemyCanvasGO>k__BackingField: {fileID: 9154756947731593831}
   <canvasDisplayTime>k__BackingField: 1
+  <enemiesManager>k__BackingField: {fileID: 0}
   <agent>k__BackingField: {fileID: 4389434555793215646}
   <playerBase>k__BackingField: {fileID: 0}
   <bow>k__BackingField: {fileID: 6112309546542241209}
@@ -202,6 +204,28 @@ MonoBehaviour:
   <arrowSpawnPoint>k__BackingField: {fileID: 4333834536538561855}
   <maxShootForce>k__BackingField: 100
   <precision>k__BackingField: 2
+--- !u!114 &7874213164029583881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855801922640288010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bedfb7e495011864caec0ed92f9f964d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <respawnManager>k__BackingField: {fileID: 0}
+  <OnEnableEnabled>k__BackingField: 0
+  <OnDisableEnabled>k__BackingField: 1
+  startPos: {x: 0, y: 0, z: 0}
+  startRot: {x: 0, y: 0, z: 0, w: 1}
+  <startParent>k__BackingField: {fileID: 0}
+  <started>k__BackingField: 0
+  <objectType>k__BackingField: 3
+  <enemies>k__BackingField: {fileID: 0}
+  <enemy>k__BackingField: {fileID: 8758101450355438376}
 --- !u!195 &4389434555793215646
 NavMeshAgent:
   m_ObjectHideFlags: 0

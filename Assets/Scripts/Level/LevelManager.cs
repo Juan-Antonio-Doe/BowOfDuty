@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour {
 
     [field: Header("Autoattach On Editor Properties")]
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private PlayerManager playerManager { get; set; }
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private RespawnManager respawnManager { get; set; }
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private AlliesManager alliesManager { get; set; }
 
     [field: Header("Level Properties")]
     [field: Header("Player")]
@@ -36,6 +39,9 @@ public class LevelManager : MonoBehaviour {
 
     void Update() {
         isLevelOnGoingDebug = IsLevelOnGoing;
+
+        RespawnEnemies();
+        RespawnAllies();
     }
 
     public void StartLevel() {
@@ -44,5 +50,23 @@ public class LevelManager : MonoBehaviour {
 
     public void EndLevel() {
         IsLevelOnGoing = false;
+    }
+
+    void RespawnEnemies() {
+        if (!IsLevelOnGoing || !respawnManager.respawnEnabled)
+            return;
+
+        if (respawnManager.EnemyListCount > 0) {
+            respawnManager.GetEnemyFromPool();
+        }
+    }
+
+    void RespawnAllies() {
+        if (!IsLevelOnGoing || !respawnManager.respawnEnabled)
+            return;
+
+        if (respawnManager.AllyListCount > 0) {
+            respawnManager.GetAllyFromPool();
+        }
     }
 }
