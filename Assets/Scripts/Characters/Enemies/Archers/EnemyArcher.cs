@@ -29,6 +29,7 @@ public class EnemyArcher : Enemy {
     [field: Header("Debug")]
     [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
+    [field: SerializeField, ReadOnlyField] private EnemyArcherState.STATE meStateNow { get; set; }
 
     private Coroutine hideCanvasAfterTimeCo;
     private bool isStarted { get; set; }
@@ -91,6 +92,7 @@ public class EnemyArcher : Enemy {
             return;
 
         currentState = currentState.Process();
+        meStateNow = currentState.currentState;
 
         if (!isDead) {
             if (attackTarget != null) {
@@ -181,7 +183,7 @@ public class EnemyArcher : Enemy {
         health = maxHealth;
         isDead = false;
 
-        enemiesManager.MoveEnemyToRandomSpawn(transform);
+        enemiesManager?.MoveEnemyToRandomSpawn(transform);
     }
 
     private void OnDrawGizmosSelected() {

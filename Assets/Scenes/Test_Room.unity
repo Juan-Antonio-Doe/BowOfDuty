@@ -1312,7 +1312,7 @@ MonoBehaviour:
   <player>k__BackingField: {fileID: 780176637}
   <levelManager>k__BackingField: {fileID: 743179693}
   <spawnPosition>k__BackingField: {fileID: 414973803}
-  <maxGhosts>k__BackingField: 20
+  <maxGhosts>k__BackingField: 1
   <ghostPrefab>k__BackingField: {fileID: 3008383720824811588, guid: 427a51a5b0df7774496b45b72bc96f06, type: 3}
 --- !u!114 &623064524 stripped
 MonoBehaviour:
@@ -4827,6 +4827,10 @@ PrefabInstance:
     - target: {fileID: 2160579669934765329, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: m_Name
       value: __Allies__
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160579669934765329, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <revalidateProperties>k__BackingField

@@ -111,7 +111,7 @@ public class AllyArcher : NPC {
         health = maxHealth;
         isDead = false;
 
-        alliesManager.MoveAllyToRandomSpawn(transform);
+        alliesManager?.MoveAllyToRandomSpawn(transform);
     }
 
     private void OnDrawGizmosSelected() {

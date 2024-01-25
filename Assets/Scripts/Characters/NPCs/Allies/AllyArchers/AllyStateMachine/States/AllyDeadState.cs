@@ -6,9 +6,18 @@ internal class AllyDeadState : AllyArcherState {
     }
 
     public override void Enter() {
-        base.Enter();
-
+        /*agent.isStopped = true;
+        enemy.gameObject.SetActive(false);*/
+        isAlreadyDead = true;
         agent.isStopped = true;
-        ally.gameObject.SetActive(false);
+        agent.ResetPath();
+
+        base.Enter();
+    }
+
+    public override void Exit() {
+        isAlreadyDead = false;
+
+        base.Exit();
     }
 }
