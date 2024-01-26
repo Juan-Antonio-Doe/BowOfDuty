@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
 
     [field: Header("- Autoattach propierties -")]
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private LevelManager levelManager { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private PlayerMovement playerMovement { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform deathRespawnPoint { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform playerRespawnPoint { get; set; }
     [field: SerializeField] private bool revalidateProperties { get; set; } = false;
@@ -17,6 +18,8 @@ public class PlayerManager : MonoBehaviour {
     [field: Header("Player settings")]
     [field: SerializeField, ReadOnlyField] private float health { get; set; } = 100f;
     [field: SerializeField] private float maxHealth { get; set; } = 100f;
+    [field: SerializeField, ReadOnlyField] private int lives { get; set; }
+    [field: SerializeField] private int maxLives { get; set; } = 3;
     [field: SerializeField] private float enemyRayCastDistance { get; set; } = 60f;
     [field: SerializeField] private LayerMask enemyLayer { get; set; } = 1 << 8;
 
@@ -68,6 +71,7 @@ public class PlayerManager : MonoBehaviour {
         centerHeight = Screen.height / 2;
 
         health = maxHealth;
+        lives = maxLives;
         ghostTime = maxGhostTime;
     }
 
@@ -82,12 +86,14 @@ public class PlayerManager : MonoBehaviour {
         if (isGhost) {
             ghostTime -= Time.deltaTime;
 
-            // ToDo: Tell the player how much time left to lose the game.
-
             if (ghostTime <= 0) {
                 ghostTime = 0;
-                // ToDo: Game over.
-                levelManager.EndLevel(false);
+                lives--;
+                if (lives == 0) {
+                    levelManager.EndLevel(false);
+                } else {
+                    ResurrectPlayer();
+                }
             }
         }
     }
@@ -106,6 +112,7 @@ public class PlayerManager : MonoBehaviour {
     void Die() {
         isDead = true;
         isGhost = true;
+        playerMovement.unlimitedSprint = true;
         TeleportToDeathPrision();
         onDeadEvent?.Invoke();
     }
@@ -135,5 +142,6 @@ public class PlayerManager : MonoBehaviour {
         health = maxHealth;
         isDead = false;
         ghostTime = maxGhostTime;
+        playerMovement.unlimitedSprint = false;
     }
 }

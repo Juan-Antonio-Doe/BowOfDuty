@@ -87,11 +87,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ca21e5c5ce2d44991d0e0f67aecbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <levelManager>k__BackingField: {fileID: 0}
+  <deathRespawnPoint>k__BackingField: {fileID: 0}
+  <playerRespawnPoint>k__BackingField: {fileID: 0}
+  <revalidateProperties>k__BackingField: 0
   <health>k__BackingField: 100
   <maxHealth>k__BackingField: 100
+  <enemyRayCastDistance>k__BackingField: 60
   <enemyLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
+  <maxGhostTime>k__BackingField: 30
+  <ghostTime>k__BackingField: 0
+  <onDeadEvent>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5349655229571412672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +146,7 @@ MonoBehaviour:
   <sprintSpeed>k__BackingField: 6
   <acceleration>k__BackingField: 10
   <isSprinting>k__BackingField: 0
+  <sprintStaminaMax>k__BackingField: 100
   <airMovementMultiplier>k__BackingField: 2.35
   <jumpForce>k__BackingField: 8
   <airDrag>k__BackingField: 2

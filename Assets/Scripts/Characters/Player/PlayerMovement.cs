@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour {
     [field: SerializeField, ReadOnlyField] private bool isGrounded { get; set; }
     private float groundDistance { get; set; } = 0.4f;
 
+    public bool unlimitedSprint { get; set; }
+
     // Private slopes properties
     RaycastHit slopeHit;
 
@@ -138,7 +140,9 @@ public class PlayerMovement : MonoBehaviour {
     void ControlSpeed() {
         if (isSprinting && isGrounded && sprintStamina > 0) {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
-            sprintStamina -= 10f * Time.deltaTime;
+
+            if (!unlimitedSprint)
+                sprintStamina -= 10f * Time.deltaTime;
         }
         else if (playerWallRun.WallLeft || playerWallRun.WallRight) {
             moveSpeed = sprintSpeed * 1.5f;

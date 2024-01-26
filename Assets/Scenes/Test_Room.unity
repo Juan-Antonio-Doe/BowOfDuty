@@ -8512,10 +8512,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7391642764197960643, guid: 5302ac33d071ab942b2309101f6026cd, type: 3}
-      propertyPath: <maxHealth>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7391642764197960643, guid: 5302ac33d071ab942b2309101f6026cd, type: 3}
       propertyPath: <levelManager>k__BackingField
       value: 
       objectReference: {fileID: 743179693}

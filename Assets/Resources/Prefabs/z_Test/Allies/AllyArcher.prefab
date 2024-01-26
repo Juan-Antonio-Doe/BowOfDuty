@@ -52,15 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcedc33dfd180f49b68af9058c78660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 20
+  <maxHealth>k__BackingField: 30
   <health>k__BackingField: 20
   <attackRange>k__BackingField: 10
   <attackCooldown>k__BackingField: 1
   <alliesManager>k__BackingField: {fileID: 0}
   <agent>k__BackingField: {fileID: 6201978915445113648}
-  <enemyBase>k__BackingField: {fileID: 0}
   <bow>k__BackingField: {fileID: 1776077026119905388}
-  <revalidateProperties>k__BackingField: 0
   <moveSpeed>k__BackingField: 4
   <targetMasks>k__BackingField:
     serializedVersion: 2
@@ -69,6 +67,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   <attackTarget>k__BackingField: {fileID: 0}
+  <enemyBase>k__BackingField: {fileID: 0}
   <meStateNow>k__BackingField: 0
 --- !u!114 &1776077026119905388
 MonoBehaviour:
