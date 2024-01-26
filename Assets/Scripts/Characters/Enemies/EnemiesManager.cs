@@ -35,6 +35,9 @@ public class EnemiesManager : MonoBehaviour {
 
 
     public void MoveEnemyToRandomSpawn(Transform enemy) {
+        if (enemy == null)
+            return;
+
         int randomSpawnIndex = GenerateRandomNumber(0, enemySpawnPoints.Count);
 
         enemy.position = NavMesh.SamplePosition(enemySpawnPoints[randomSpawnIndex].position, out NavMeshHit hit,

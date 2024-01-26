@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool
 {
     private Poolable poolableObject;
     private int size = 20;
@@ -17,7 +17,7 @@ public class ObjectPool : MonoBehaviour
 
     public static ObjectPool CreatePool(Poolable _poolable, int _size, string _poolName)
     {
-        ObjectPool _pool = new ObjectPool(_poolable, _size);
+        ObjectPool _pool = new(_poolable, _size);
         GameObject _poolRoot = new GameObject(_poolName);
         _pool.PopulatePool(_poolRoot.transform);
         return _pool;
@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour
         Poolable _temp = null;
         for (int i = 0; i < size; i++)
         {
-            _temp = Instantiate(poolableObject, _parent);
+            _temp = GameObject.Instantiate(poolableObject, _parent);
             _temp.gameObject.SetActive(false);   
             _temp.pool = this;
             availableObjects.Add(_temp);

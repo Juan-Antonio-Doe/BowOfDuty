@@ -187,6 +187,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   <attackTarget>k__BackingField: {fileID: 0}
+  <meStateNow>k__BackingField: 0
 --- !u!114 &6112309546542241209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,10 +338,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4032
+    m_Bits: 1984
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 2103
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0

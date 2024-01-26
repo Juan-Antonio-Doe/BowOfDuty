@@ -32,10 +32,13 @@ public class AlliesManager : MonoBehaviour {
     }
 
 
-    public void MoveAllyToRandomSpawn(Transform enemy) {
+    public void MoveAllyToRandomSpawn(Transform ally) {
+        if (ally == null)
+            return;
+
         int randomSpawnIndex = GenerateRandomNumber(0, allySpawnPoints.Count);
 
-        enemy.position = NavMesh.SamplePosition(allySpawnPoints[randomSpawnIndex].position, out NavMeshHit hit,
+        ally.position = NavMesh.SamplePosition(allySpawnPoints[randomSpawnIndex].position, out NavMeshHit hit,
             1f, NavMesh.AllAreas) ? hit.position : allySpawnPoints[randomSpawnIndex].position;
     }
 

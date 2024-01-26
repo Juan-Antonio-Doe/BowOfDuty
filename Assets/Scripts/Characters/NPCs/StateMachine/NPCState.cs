@@ -50,4 +50,15 @@ public class NPCState {
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+
+    protected void DeleteArrowsOnBody() {
+        if (npc.transform.childCount > 2) {
+            // Destroy gameobject from the last child to the third child (inclusive).
+            for (int i = npc.transform.childCount - 1; i >= 2; i--) {
+                if (npc.transform.GetChild(i) != null) {
+                    GameObject.Destroy(npc.transform.GetChild(i).gameObject);
+                }
+            }
+        }
+    }
 }

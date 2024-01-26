@@ -58,7 +58,8 @@ public class AllyArcher : NPC {
         if (!isStarted)
             return;
 
-        currentState = new AllyMovingForwardState(this, agent);
+        //currentState = new AllyMovingForwardState(this, agent);
+        currentState.ChangeState(new AllyMovingForwardState(this, agent));
     }
 
     void OnDisable() {
@@ -111,7 +112,14 @@ public class AllyArcher : NPC {
         health = maxHealth;
         isDead = false;
 
-        alliesManager?.MoveAllyToRandomSpawn(transform);
+        // Error when exiting play mode
+        
+        try {
+            if (gameObject != null)
+                alliesManager?.MoveAllyToRandomSpawn(transform);
+        } catch (MissingReferenceException) {
+            //skip
+        }
     }
 
     private void OnDrawGizmosSelected() {

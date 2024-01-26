@@ -5,11 +5,6 @@ internal class EnemyAttackingNPCState : EnemyArcherState {
         currentState = STATE.AttackingNPC;
     }
 
-    public override void Enter() {
-
-        base.Enter();
-    }
-
     public override void Update() {
         base.Update();
 

@@ -69,7 +69,8 @@ public class EnemyArcher : Enemy {
         if (!isStarted)
             return;
 
-        currentState = new EnemyMovingForwardState(this, agent);
+        //currentState = new EnemyMovingForwardState(this, agent);
+        currentState.ChangeState(new EnemyMovingForwardState(this, agent));
     }
 
     void OnDisable() {
@@ -88,8 +89,13 @@ public class EnemyArcher : Enemy {
     }
 
     void Update() {
-        if (!LevelManager.IsLevelOnGoing)
+        if (!LevelManager.IsLevelOnGoing) {
+            if (agent.remainingDistance > 0f) {
+                agent.SetDestination(transform.position);
+                agent.ResetPath();
+            }
             return;
+        }
 
         currentState = currentState.Process();
         meStateNow = currentState.currentState;
@@ -124,11 +130,6 @@ public class EnemyArcher : Enemy {
                 return; // Stop the loop once the first valid target is found
             }
         }
-    }
-
-    protected override void Die() {
-        //base.Die();
-        isDead = true;
     }
 
     void ShowHideCanvas(Transform enemyTransform) {
@@ -183,7 +184,15 @@ public class EnemyArcher : Enemy {
         health = maxHealth;
         isDead = false;
 
-        enemiesManager?.MoveEnemyToRandomSpawn(transform);
+        // Error when exiting play mode
+
+        try {
+            if (gameObject != null)
+                enemiesManager?.MoveEnemyToRandomSpawn(transform);
+        }
+        catch (MissingReferenceException) {
+            // Skip
+        }
     }
 
     private void OnDrawGizmosSelected() {
