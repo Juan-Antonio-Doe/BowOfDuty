@@ -3169,6 +3169,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1347429269}
     m_Modifications:
+    - target: {fileID: 1018551783691831983, guid: 1ffd2821759059348aec31748b09a563, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5855801922640288010, guid: 1ffd2821759059348aec31748b09a563, type: 3}
       propertyPath: m_Name
       value: EnemyArcher (14)
@@ -5343,6 +5347,7 @@ GameObject:
   - component: {fileID: 1601754240}
   - component: {fileID: 1601754243}
   - component: {fileID: 1601754245}
+  - component: {fileID: 1601754246}
   m_Layer: 8
   m_Name: BasePlaceholder
   m_TagString: EnemyBase
@@ -5500,6 +5505,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16929d26a2857da4ba26bee344a73fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1601754246
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601754238}
+  serializedVersion: 4
+  m_Mass: 10000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1667763957
 GameObject:
   m_ObjectHideFlags: 0
@@ -8484,6 +8516,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7391642764197960643, guid: 5302ac33d071ab942b2309101f6026cd, type: 3}
+      propertyPath: <levelManager>k__BackingField
+      value: 
+      objectReference: {fileID: 743179693}
+    - target: {fileID: 7391642764197960643, guid: 5302ac33d071ab942b2309101f6026cd, type: 3}
       propertyPath: <deathRespawnPoint>k__BackingField
       value: 
       objectReference: {fileID: 414973803}
@@ -8548,6 +8584,10 @@ PrefabInstance:
       propertyPath: <player>k__BackingField
       value: 
       objectReference: {fileID: 780176637}
+    - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
+      propertyPath: <alliesManager>k__BackingField
+      value: 
+      objectReference: {fileID: 1254183310}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <attackersBase>k__BackingField
       value: 

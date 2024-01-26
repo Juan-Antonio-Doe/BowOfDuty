@@ -48,8 +48,14 @@ public class LevelManager : MonoBehaviour {
         IsLevelOnGoing = true;
     }
 
-    public void EndLevel() {
+    public void EndLevel(bool win=true) {
         IsLevelOnGoing = false;
+
+        if (win) {
+            Debug.Log("You win!");
+        } else {
+            Debug.Log("Game Over");
+        }
     }
 
     void RespawnEnemies() {

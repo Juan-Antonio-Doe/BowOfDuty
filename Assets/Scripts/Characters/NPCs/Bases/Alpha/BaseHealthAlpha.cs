@@ -111,7 +111,7 @@ public class BaseHealthAlpha : MonoBehaviour {
     void OnTriggerExitTest_1(Collider other) {
         if (isEnemyBase) {
             if (other.CompareTag("Ally")) {
-                if (Physics.OverlapSphere(transform.position, sphereTrigger.radius, attackersMask).Length == 1) {
+                if (Physics.OverlapSphere(transform.position, sphereTrigger.radius, attackersMask).Length == 0) {
                     enemiesManager.IsBaseBeingAttacked = false;
                     Debug.Log("Enemy base is not being attacked");
                 }
@@ -119,7 +119,7 @@ public class BaseHealthAlpha : MonoBehaviour {
         }
         else {
             if (other.CompareTag("Enemy")) {
-                if (Physics.OverlapSphere(transform.position, sphereTrigger.radius, attackersMask).Length == 1) {
+                if (Physics.OverlapSphere(transform.position, sphereTrigger.radius, attackersMask).Length == 0) {
                     alliesManager.IsBaseBeingAttacked = false;
                     Debug.Log("Ally base is not being attacked");
                 }
@@ -135,6 +135,7 @@ public class BaseHealthAlpha : MonoBehaviour {
                     allyArcherList.Add(allyArcher);
                 }
                 enemiesManager.IsBaseBeingAttacked = true;
+                //Debug.Log("Enemy base is being attacked");
             }
         }
         else {

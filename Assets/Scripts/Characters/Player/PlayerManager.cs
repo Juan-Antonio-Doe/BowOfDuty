@@ -1,3 +1,4 @@
+using Nrjwolf.Tools.AttachAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour {
 
     [field: Header("- Autoattach propierties -")]
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private LevelManager levelManager { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform deathRespawnPoint { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform playerRespawnPoint { get; set; }
     [field: SerializeField] private bool revalidateProperties { get; set; } = false;
@@ -19,10 +21,13 @@ public class PlayerManager : MonoBehaviour {
     [field: SerializeField] private LayerMask enemyLayer { get; set; } = 1 << 8;
 
     [field: Header("Death")]
+    [field: SerializeField] private float maxGhostTime { get; set; } = 30f;
+    [field: SerializeField, ReadOnlyField] private float ghostTime { get; set; }
     [field: SerializeField] private UnityEvent onDeadEvent { get; set; }
 
     private bool isDead { get; set; }
     public bool IsDead { get => isDead; }
+    private bool isGhost { get; set; }
 
     // Definir un evento que se dispara cuando el jugador mira a un enemigo
     public static event Action<Transform> OnPlayerLookAtEnemy;
@@ -63,6 +68,7 @@ public class PlayerManager : MonoBehaviour {
         centerHeight = Screen.height / 2;
 
         health = maxHealth;
+        ghostTime = maxGhostTime;
     }
 
     void Update() {
@@ -71,6 +77,18 @@ public class PlayerManager : MonoBehaviour {
 
         if (!isDead) {
             CheckEnemyInFront();
+        }
+
+        if (isGhost) {
+            ghostTime -= Time.deltaTime;
+
+            // ToDo: Tell the player how much time left to lose the game.
+
+            if (ghostTime <= 0) {
+                ghostTime = 0;
+                // ToDo: Game over.
+                levelManager.EndLevel(false);
+            }
         }
     }
 
@@ -87,6 +105,7 @@ public class PlayerManager : MonoBehaviour {
 
     void Die() {
         isDead = true;
+        isGhost = true;
         TeleportToDeathPrision();
         onDeadEvent?.Invoke();
     }
@@ -111,8 +130,10 @@ public class PlayerManager : MonoBehaviour {
     }
 
     public void ResurrectPlayer() {
+        isGhost = false;
         transform.position = playerRespawnPoint.position;
         health = maxHealth;
         isDead = false;
+        ghostTime = maxGhostTime;
     }
 }

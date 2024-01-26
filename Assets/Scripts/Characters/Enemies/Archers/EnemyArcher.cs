@@ -74,8 +74,10 @@ public class EnemyArcher : Enemy {
         if (!isStarted)
             return;
 
-        //currentState = new EnemyMovingForwardState(this, agent);
-        currentState.ChangeState(new EnemyMovingForwardState(this, agent));
+        if (enemiesManager.IsBaseBeingAttacked)
+            currentState.ChangeState(new EnemyDefendingBaseState(this, agent));
+        else
+            currentState.ChangeState(new EnemyMovingForwardState(this, agent));
     }
 
     void OnDisable() {
@@ -92,6 +94,8 @@ public class EnemyArcher : Enemy {
         enemyCanvasGO.SetActive(false);
 
         currentState = new EnemyMovingForwardState(this, agent);
+
+        isStarted = true;
     }
 
     void Update() {
