@@ -9,12 +9,11 @@ public class AllyArcher : NPC {
 
     [field: Header("Autoattach properties")]
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private AlliesManager alliesManager { get; set; }
+    public AlliesManager AlliesManager { get { return alliesManager; } }
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
-    [field: SerializeField, ReadOnlyField] protected Transform enemyBase { get; set; }
-    public Transform EnemyBase { get => enemyBase; }
     [field: SerializeField, GetComponent, ReadOnlyField] protected AllyBow bow { get; set; }
     public AllyBow Bow { get => bow; }
-    [field: SerializeField] private bool revalidateProperties { get; set; } = false;
+    //[field: SerializeField] private bool revalidateProperties { get; set; } = false;
 
     [field: Header("Move settings")]
     [field: SerializeField] private float moveSpeed { get; set; } = 4f;
@@ -22,17 +21,20 @@ public class AllyArcher : NPC {
 
     [field: Header("Attack settings")]
     [field: SerializeField] private LayerMask targetMasks { get; set; }
+    [field: SerializeField] private LayerMask obstacleMask { get; set; }
 
     private AllyArcherState currentState { get; set; }
 
     [field: Header("Debug")]
     [field: SerializeField, ReadOnlyField] private Transform attackTarget { get; set; }
     public Transform AttackTarget { get => attackTarget; set => attackTarget = value; }
+    [field: SerializeField, ReadOnlyField] private Transform enemyBase { get; set; }
+    public Transform EnemyBase { get => enemyBase; }
     [field: SerializeField, ReadOnlyField] private AllyArcherState.STATE meStateNow { get; set; }
 
     private bool isStarted { get; set; }
 
-    void OnValidate() {
+    /*void OnValidate() {
 #if UNITY_EDITOR
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
@@ -52,14 +54,18 @@ public class AllyArcher : NPC {
             enemyBase = GameObject.FindGameObjectWithTag("EnemyBase").transform.GetChild(0);
         }
         revalidateProperties = false;
-    }
+    }*/
 
     void OnEnable() {
         if (!isStarted)
             return;
 
-        //currentState = new AllyMovingForwardState(this, agent);
-        currentState.ChangeState(new AllyMovingForwardState(this, agent));
+        if (alliesManager.IsBaseBeingAttacked)
+            currentState.ChangeState(new AllyDefendingBaseState(this, agent));
+        else
+            currentState.ChangeState(new AllyMovingForwardState(this, agent));
+
+        //Debug.Log($"AllyArcher: {alliesManager.IsBaseBeingAttacked}");
     }
 
     void OnDisable() {
@@ -68,6 +74,7 @@ public class AllyArcher : NPC {
 
     void Start() {
         health = maxHealth;
+        enemyBase = alliesManager.AttackersBase;
 
         currentState = new AllyMovingForwardState(this, agent);
 
@@ -75,8 +82,13 @@ public class AllyArcher : NPC {
     }
 
     void Update() {
-        if (!LevelManager.IsLevelOnGoing)
+        if (!LevelManager.IsLevelOnGoing) {
+            if (agent.remainingDistance > 0f) {
+                agent.SetDestination(transform.position);
+                agent.ResetPath();
+            }
             return;
+        }
 
         currentState = currentState.Process();
         meStateNow = currentState.currentState;
@@ -101,8 +113,14 @@ public class AllyArcher : NPC {
 
         foreach (Collider collider in colliders) {
             if (collider.gameObject != gameObject && collider.gameObject.activeInHierarchy) {
-                attackTarget = collider.gameObject.transform;
-                return; // Stop the loop once the first valid target is found
+                // Check if there is an obstacle between the enemy and the target
+                if (Physics.Raycast(transform.position, collider.gameObject.transform.position - transform.position, attackRange, obstacleMask)) {
+                    continue; // Skip this iteration if there is an obstacle between the enemy and the target
+                }
+                else {
+                    attackTarget = collider.gameObject.transform;
+                    return; // Stop the loop once the first valid target is found
+                }
             }
         }
     }

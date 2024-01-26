@@ -9,8 +9,15 @@ using UnityEngine.AI;
 public class AlliesManager : MonoBehaviour {
 
     [field: Header("Autoattach properties")]
+    [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
+    public EnemiesManager EnemiesManager { get { return enemiesManager; } }
+    [field: SerializeField, ReadOnlyField] private Transform attackersBase { get; set; }
+    public Transform AttackersBase { get { return attackersBase; } }
     [field: SerializeField, ReadOnlyField] private List<Transform> allySpawnPoints { get; set; } = new List<Transform>();
     [field: SerializeField] private bool revalidateProperties { get; set; }
+
+    [field: SerializeField, ReadOnlyField] private bool isBaseBeingAttacked { get; set; }
+    public bool IsBaseBeingAttacked { get { return isBaseBeingAttacked; } set { isBaseBeingAttacked = value; } }
 
     void OnValidate() {
 #if UNITY_EDITOR
@@ -25,6 +32,9 @@ public class AlliesManager : MonoBehaviour {
     }
 
     void ValidateAssings() {
+        if (attackersBase == null || revalidateProperties) {
+            attackersBase = GameObject.FindGameObjectWithTag("EnemyBase").transform.GetChild(0);
+        }
         if (allySpawnPoints == null || allySpawnPoints.Count == 0 || revalidateProperties) {
             allySpawnPoints = GameObject.FindGameObjectsWithTag("AllyRespawnPoint").Select(x => x.transform).ToList();
         }

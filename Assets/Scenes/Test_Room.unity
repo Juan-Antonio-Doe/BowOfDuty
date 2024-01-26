@@ -1461,7 +1461,7 @@ GameObject:
   - component: {fileID: 375907329}
   - component: {fileID: 375907328}
   - component: {fileID: 375907327}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1734,6 +1734,7 @@ GameObject:
   - component: {fileID: 468689809}
   - component: {fileID: 468689808}
   - component: {fileID: 468689811}
+  - component: {fileID: 468689813}
   m_Layer: 9
   m_Name: BasePlaceholder
   m_TagString: PlayerBase
@@ -1844,13 +1845,13 @@ SphereCollider:
     m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3712
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &468689812
 MonoBehaviour:
@@ -1865,12 +1866,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <levelManager>k__BackingField: {fileID: 743179693}
+  <enemiesManager>k__BackingField: {fileID: 81892113}
+  <alliesManager>k__BackingField: {fileID: 1254183310}
+  <sphereTrigger>k__BackingField: {fileID: 468689811}
   <maxHealth>k__BackingField: 5000000
   <currentHealth>k__BackingField: 0
   <isEnemyBase>k__BackingField: 0
+  <attackersMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
   <healthBar>k__BackingField: {fileID: 852593345}
   <healthText>k__BackingField: {fileID: 623064524}
   <winnerText>k__BackingField: {fileID: 151922957}
+  <enemyArcherList>k__BackingField: []
+  <allyArcherList>k__BackingField: []
+--- !u!114 &468689813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468689806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16929d26a2857da4ba26bee344a73fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &528435478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3272,7 +3293,7 @@ GameObject:
   - component: {fileID: 790191644}
   - component: {fileID: 790191643}
   - component: {fileID: 790191642}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5321,6 +5342,7 @@ GameObject:
   - component: {fileID: 1601754241}
   - component: {fileID: 1601754240}
   - component: {fileID: 1601754243}
+  - component: {fileID: 1601754245}
   m_Layer: 8
   m_Name: BasePlaceholder
   m_TagString: EnemyBase
@@ -5428,16 +5450,16 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3328
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1601754244
 MonoBehaviour:
@@ -5452,12 +5474,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <levelManager>k__BackingField: {fileID: 743179693}
-  <maxHealth>k__BackingField: 50
+  <enemiesManager>k__BackingField: {fileID: 81892113}
+  <alliesManager>k__BackingField: {fileID: 1254183310}
+  <sphereTrigger>k__BackingField: {fileID: 1601754243}
+  <maxHealth>k__BackingField: 5000
   <currentHealth>k__BackingField: 0
   <isEnemyBase>k__BackingField: 1
+  <attackersMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 512
   <healthBar>k__BackingField: {fileID: 441562785}
   <healthText>k__BackingField: {fileID: 756750820}
   <winnerText>k__BackingField: {fileID: 151922957}
+  <enemyArcherList>k__BackingField: []
+  <allyArcherList>k__BackingField: []
+--- !u!114 &1601754245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601754238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16929d26a2857da4ba26bee344a73fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1667763957
 GameObject:
   m_ObjectHideFlags: 0
@@ -6239,7 +6281,7 @@ GameObject:
   - component: {fileID: 1802485579}
   - component: {fileID: 1802485578}
   - component: {fileID: 1802485577}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8083,6 +8125,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
+      propertyPath: <attackersBase>k__BackingField
+      value: 
+      objectReference: {fileID: 942745790}
+    - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
+      propertyPath: <enemiesManager>k__BackingField
+      value: 
+      objectReference: {fileID: 81892113}
+    - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <revalidateProperties>k__BackingField
       value: 0
       objectReference: {fileID: 0}
@@ -8093,39 +8143,39 @@ PrefabInstance:
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 395157920}
+      objectReference: {fileID: 101486489}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[1]
       value: 
-      objectReference: {fileID: 656755880}
+      objectReference: {fileID: 188856868}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[2]
       value: 
-      objectReference: {fileID: 1329017144}
+      objectReference: {fileID: 319480747}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[3]
       value: 
-      objectReference: {fileID: 1908042963}
+      objectReference: {fileID: 380214174}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[4]
       value: 
-      objectReference: {fileID: 188856868}
+      objectReference: {fileID: 395157920}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[5]
       value: 
-      objectReference: {fileID: 101486489}
+      objectReference: {fileID: 656755880}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[6]
       value: 
-      objectReference: {fileID: 1891940584}
+      objectReference: {fileID: 682929379}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[7]
       value: 
-      objectReference: {fileID: 1387960018}
+      objectReference: {fileID: 884819863}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[8]
       value: 
-      objectReference: {fileID: 1412218376}
+      objectReference: {fileID: 890576924}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[9]
       value: 
@@ -8133,47 +8183,47 @@ PrefabInstance:
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[10]
       value: 
-      objectReference: {fileID: 1667763958}
+      objectReference: {fileID: 1082191447}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[11]
       value: 
-      objectReference: {fileID: 1700921432}
+      objectReference: {fileID: 1329017144}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[12]
       value: 
-      objectReference: {fileID: 1410287227}
+      objectReference: {fileID: 1387960018}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[13]
       value: 
-      objectReference: {fileID: 380214174}
+      objectReference: {fileID: 1410287227}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[14]
       value: 
-      objectReference: {fileID: 890576924}
+      objectReference: {fileID: 1412218376}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[15]
       value: 
-      objectReference: {fileID: 1082191447}
+      objectReference: {fileID: 1667763958}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[16]
       value: 
-      objectReference: {fileID: 1855081643}
+      objectReference: {fileID: 1700921432}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[17]
       value: 
-      objectReference: {fileID: 884819863}
+      objectReference: {fileID: 1855081643}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[18]
       value: 
-      objectReference: {fileID: 682929379}
+      objectReference: {fileID: 1862338045}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[19]
       value: 
-      objectReference: {fileID: 1862338045}
+      objectReference: {fileID: 1891940584}
     - target: {fileID: 4200636169446112376, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <allySpawnPoints>k__BackingField.Array.data[20]
       value: 
-      objectReference: {fileID: 319480747}
+      objectReference: {fileID: 1908042963}
     - target: {fileID: 5284228808083471616, guid: 38c5789b7efbd134fb7936e5e9362a0b, type: 3}
       propertyPath: <enemyBase>k__BackingField
       value: 
@@ -8499,6 +8549,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 780176637}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
+      propertyPath: <attackersBase>k__BackingField
+      value: 
+      objectReference: {fileID: 1879580901}
+    - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <revalidateProperties>k__BackingField
       value: 0
       objectReference: {fileID: 0}
@@ -8509,43 +8563,43 @@ PrefabInstance:
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 227991269}
+      objectReference: {fileID: 6584647}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[1]
       value: 
-      objectReference: {fileID: 442388061}
+      objectReference: {fileID: 74585122}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[2]
       value: 
-      objectReference: {fileID: 915568399}
+      objectReference: {fileID: 217306152}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[3]
       value: 
-      objectReference: {fileID: 1316262262}
+      objectReference: {fileID: 227991269}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[4]
       value: 
-      objectReference: {fileID: 1199114375}
+      objectReference: {fileID: 406067845}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[5]
       value: 
-      objectReference: {fileID: 1586811205}
+      objectReference: {fileID: 442388061}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[6]
       value: 
-      objectReference: {fileID: 1340661130}
+      objectReference: {fileID: 548652512}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[7]
       value: 
-      objectReference: {fileID: 548652512}
+      objectReference: {fileID: 663445249}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[8]
       value: 
-      objectReference: {fileID: 1815062617}
+      objectReference: {fileID: 915568399}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[9]
       value: 
-      objectReference: {fileID: 1417111657}
+      objectReference: {fileID: 1139404380}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[10]
       value: 
@@ -8553,43 +8607,43 @@ PrefabInstance:
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[11]
       value: 
-      objectReference: {fileID: 1698313694}
+      objectReference: {fileID: 1199114375}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[12]
       value: 
-      objectReference: {fileID: 406067845}
+      objectReference: {fileID: 1316262262}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[13]
       value: 
-      objectReference: {fileID: 6584647}
+      objectReference: {fileID: 1340661130}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[14]
       value: 
-      objectReference: {fileID: 74585122}
+      objectReference: {fileID: 1417111657}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[15]
       value: 
-      objectReference: {fileID: 1139404380}
+      objectReference: {fileID: 1477438686}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[16]
       value: 
-      objectReference: {fileID: 2010776158}
+      objectReference: {fileID: 1586811205}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[17]
       value: 
-      objectReference: {fileID: 217306152}
+      objectReference: {fileID: 1698313694}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[18]
       value: 
-      objectReference: {fileID: 2035988304}
+      objectReference: {fileID: 1815062617}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[19]
       value: 
-      objectReference: {fileID: 1477438686}
+      objectReference: {fileID: 2010776158}
     - target: {fileID: 5644311303969989559, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <enemySpawnPoints>k__BackingField.Array.data[20]
       value: 
-      objectReference: {fileID: 663445249}
+      objectReference: {fileID: 2035988304}
     - target: {fileID: 5691153122569608153, guid: dd9b8c92e08ef6a45845fa2c8175de6a, type: 3}
       propertyPath: <precision>k__BackingField
       value: 3

@@ -10,6 +10,7 @@ public class EnemyArcher : Enemy {
 
     [field: Header("Autoattach properties")]
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
+    public EnemiesManager EnemiesManager { get { return enemiesManager; } }
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
     [field: SerializeField, ReadOnlyField] protected Transform playerBase { get; set; }
     public Transform PlayerBase { get => playerBase; }
@@ -23,6 +24,7 @@ public class EnemyArcher : Enemy {
 
     [field: Header("Attack settings")]
     [field: SerializeField] private LayerMask targetMasks { get; set; }
+    [field: SerializeField] private LayerMask obstacleMask { get; set; }
 
     private EnemyArcherState currentState { get; set; }
 
@@ -42,24 +44,27 @@ public class EnemyArcher : Enemy {
         if (!isValidPrefabStage && prefabConnected) {
             // Variables that will only be checked when they are in a scene
             if (!Application.isPlaying) {
-                if (playerBase == null || revalidateProperties) {
-                    revalidateProperties = false;
-                    playerBase = GameObject.FindGameObjectWithTag("PlayerBase").transform.GetChild(0);
-                }
-
-                if (healthText == null || revalidateProperties) {
-                    revalidateProperties = false;
-                    healthText = healthBar.transform.GetChild(0).GetComponent<Text>();
-                }
-
-                if (enemyCanvasGO == null || revalidateProperties) {
-                    revalidateProperties = false;
-                    enemyCanvasGO = healthBar.gameObject.GetComponentInParent<Canvas>().gameObject;
-                }
+                if (revalidateProperties)
+                    ValidateAssings();
             }
         }
-
     #endif
+    }
+
+    void ValidateAssings() {
+        /*if (playerBase == null || revalidateProperties) {
+            playerBase = GameObject.FindGameObjectWithTag("PlayerBase").transform.GetChild(0);
+        }*/
+
+        if (healthText == null || revalidateProperties) {
+            healthText = healthBar.transform.GetChild(0).GetComponent<Text>();
+        }
+
+        if (enemyCanvasGO == null || revalidateProperties) {
+            enemyCanvasGO = healthBar.gameObject.GetComponentInParent<Canvas>().gameObject;
+        }
+
+        revalidateProperties = false;
     }
 
     void OnEnable() {
@@ -82,6 +87,7 @@ public class EnemyArcher : Enemy {
 
     void Start() {
         health = maxHealth;
+        playerBase = enemiesManager.AttackersBase;
 
         enemyCanvasGO.SetActive(false);
 
@@ -126,8 +132,14 @@ public class EnemyArcher : Enemy {
 
         foreach (Collider collider in colliders) {
             if (collider.gameObject != gameObject && collider.gameObject.activeInHierarchy) {
-                attackTarget = collider.gameObject.transform;
-                return; // Stop the loop once the first valid target is found
+                // Check if there is an obstacle between the enemy and the target
+                if (Physics.Raycast(transform.position, collider.gameObject.transform.position - transform.position, attackRange, obstacleMask)) {
+                    continue; // Skip this iteration if there is an obstacle between the enemy and the target
+                }
+                else {
+                    attackTarget = collider.gameObject.transform;
+                    return; // Stop the loop once the first valid target is found
+                }
             }
         }
     }

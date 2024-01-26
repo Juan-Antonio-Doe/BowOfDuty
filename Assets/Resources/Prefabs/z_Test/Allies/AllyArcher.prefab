@@ -65,6 +65,9 @@ MonoBehaviour:
   <targetMasks>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
+  <obstacleMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1
   <attackTarget>k__BackingField: {fileID: 0}
   <meStateNow>k__BackingField: 0
 --- !u!114 &1776077026119905388

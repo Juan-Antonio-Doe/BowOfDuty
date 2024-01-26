@@ -81,7 +81,7 @@ public class AllyArcherState : NPCState {
         return false;
     }
 
-    protected void CheckAllyDetected() {
+    protected void CheckEnemyDetected() {
         if (TargetDetected()) {
             if (ally.AttackTarget.CompareTag("Enemy")) {
                 ChangeState(new AllyAttackingNPCState(ally, agent));

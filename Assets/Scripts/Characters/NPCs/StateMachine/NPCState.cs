@@ -11,6 +11,7 @@ public class NPCState {
         AttackingNPC,       // NPC is attacking the other NPC.
         AttackingBase,      // NPC is attacking the other NPC's base.
         AttackingPlayer,    // Enemy is attacking the player.
+        DefendingBase,      // NPC is defending its base.
         Wander,             // Ghost is wandering around.
         TakeCover,          // Ghost is taking cover.
         RunAway,            // Ghost is running away.

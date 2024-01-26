@@ -12,7 +12,7 @@ internal class AllyMovingForwardState : AllyArcherState {
     public override void Update() {
         base.Update();
 
-        CheckersOnUpdate();
+        CheckEnemyDetected();
 
         agent.SetDestination(ally.EnemyBase.position);
     }
@@ -21,9 +21,5 @@ internal class AllyMovingForwardState : AllyArcherState {
         agent.ResetPath();
 
         base.Exit();
-    }
-
-    void CheckersOnUpdate() {
-        CheckAllyDetected();
     }
 }
