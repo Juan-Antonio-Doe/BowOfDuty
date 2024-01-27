@@ -83,7 +83,7 @@ public class AllyArcherState : NPCState {
 
     protected void CheckEnemyDetected() {
         if (TargetDetected()) {
-            if (ally.AttackTarget.CompareTag("Enemy") || ally.AttackTarget.CompareTag("Tower")) {
+            if (ally.AttackTarget.CompareTag("Enemy") || ally.AttackTarget.CompareTag("Tower") || ally.AttackTarget.CompareTag("BatteringRam")) {
                 ChangeState(new AllyAttackingNPCState(ally, agent));
                 return;
             }

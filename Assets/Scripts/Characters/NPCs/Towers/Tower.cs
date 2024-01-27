@@ -119,6 +119,9 @@ public class Tower : NPC {
     }
 
     private void Attack() {
+        if (!TargetDetected())
+            return;
+
         AimTarget(attackTarget);
 
         if (bow.CanShoot()) {
@@ -149,6 +152,18 @@ public class Tower : NPC {
 
     void AimTarget(Transform attackTarget) {
         bow.arrowSpawnPoint.LookAt(attackTarget);
+    }
+
+    protected bool TargetDetected() {
+        if (attackTarget != null && attackTarget.gameObject.activeInHierarchy) {
+            float distanceSquared = (transform.position - attackTarget.position).sqrMagnitude;
+            if (distanceSquared <= attackRange * attackRange) {
+                return true;
+            }
+        }
+
+        attackTarget = null;
+        return false;
     }
 
     public override void TakeDamage(float damage) {

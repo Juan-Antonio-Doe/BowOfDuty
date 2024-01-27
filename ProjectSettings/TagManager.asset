@@ -14,6 +14,7 @@ TagManager:
   - DeathRespawnPoint
   - Ghost
   - Tower
+  - BatteringRam
   layers:
   - Default
   - TransparentFX

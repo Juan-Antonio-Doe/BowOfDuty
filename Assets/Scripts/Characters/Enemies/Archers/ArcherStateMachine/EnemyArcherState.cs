@@ -102,7 +102,7 @@ public class EnemyArcherState : NPCState {
                 ChangeState(new EnemyAttackingPlayerState(enemy, agent));
                 return;
             }
-            else if (enemy.AttackTarget.CompareTag("Ally") || enemy.AttackTarget.CompareTag("Tower")) {
+            else if (enemy.AttackTarget.CompareTag("Ally") || enemy.AttackTarget.CompareTag("Tower") || enemy.AttackTarget.CompareTag("BatteringRam")) {
                 ChangeState(new EnemyAttackingNPCState(enemy, agent));
                 return;
             }

@@ -41,6 +41,20 @@ public class Arrow : MonoBehaviour {
             return;
         }
 
+        // Compare if the target is a Battering Ram and the arrow is an ally.
+        if (other.CompareTag("BatteringRam") && gameObject.layer == 10) {
+            StickOnPoint(other.transform);
+            other.GetComponent<BatteringRamColliderProxy>().TakeDamage(damage);
+            return;
+        }
+
+        // Compare if the target is a Battering Ram and the arrow is an enemy.
+        if (other.CompareTag("BatteringRam") && gameObject.layer == 11) {
+            StickOnPoint(other.transform);
+            other.GetComponent<BatteringRamColliderProxy>().TakeDamage(damage);
+            return;
+        }
+
         // Compare if the taget is a Tower and the arrow is an enemy.
         if (other.CompareTag("Tower") && gameObject.layer == 11) {
             StickOnPoint(other.transform);
