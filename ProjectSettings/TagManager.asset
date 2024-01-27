@@ -13,11 +13,12 @@ TagManager:
   - AllyRespawnPoint
   - DeathRespawnPoint
   - Ghost
+  - Tower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
   - Ground

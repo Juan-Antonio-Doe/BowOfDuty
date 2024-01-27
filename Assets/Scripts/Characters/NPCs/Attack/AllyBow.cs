@@ -10,7 +10,7 @@ public class AllyBow : MonoBehaviour {
 
     [field: Header("Shoot settings")]
     [field: SerializeField] private Rigidbody arrowPrefab { get; set; }
-    [field: SerializeField] private Transform arrowSpawnPoint { get; set; }
+    [field: SerializeField] public Transform arrowSpawnPoint { get; private set; }
     [field: SerializeField] private float maxShootForce { get; set; } = 100f;
     [field: SerializeField, Range(0, 4)] private float precision { get; set; } = 1f;
 

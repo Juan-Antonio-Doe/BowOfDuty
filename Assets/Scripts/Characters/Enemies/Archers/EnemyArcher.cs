@@ -9,14 +9,14 @@ using UnityEngine.UI;
 public class EnemyArcher : Enemy {
 
     [field: Header("Autoattach properties")]
-    [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
-    public EnemiesManager EnemiesManager { get { return enemiesManager; } }
+    /*[field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
+    public EnemiesManager EnemiesManager { get { return enemiesManager; } }*/
     [field: SerializeField, GetComponent, ReadOnlyField] protected NavMeshAgent agent { get; set; }
     [field: SerializeField, ReadOnlyField] protected Transform playerBase { get; set; }
     public Transform PlayerBase { get => playerBase; }
     [field: SerializeField, GetComponent, ReadOnlyField] protected EnemyBow bow { get; set; }
     public EnemyBow Bow { get => bow; }
-    [field: SerializeField] private bool revalidateProperties { get; set; } = false;
+    [field: SerializeField] private bool revalidateProperties { get; set; }
 
     [field: Header("Move settings")]
     [field: SerializeField] private float moveSpeed { get; set; } = 4f;
@@ -74,7 +74,7 @@ public class EnemyArcher : Enemy {
         if (!isStarted)
             return;
 
-        if (enemiesManager.IsBaseBeingAttacked)
+        if (enemies.IsBaseBeingAttacked)
             currentState.ChangeState(new EnemyDefendingBaseState(this, agent));
         else
             currentState.ChangeState(new EnemyMovingForwardState(this, agent));
@@ -89,9 +89,11 @@ public class EnemyArcher : Enemy {
 
     void Start() {
         health = maxHealth;
-        playerBase = enemiesManager.AttackersBase;
+        UpdateUI();
+        playerBase = enemies.AttackersBase;
 
         enemyCanvasGO.SetActive(false);
+
 
         currentState = new EnemyMovingForwardState(this, agent);
 
@@ -129,7 +131,7 @@ public class EnemyArcher : Enemy {
         }
     }
 
-    public void CheckNearby() {
+    void CheckNearby() {
         // Detect the firt ally NPC or Player that is on attack range using OverlapSphere.
         Collider[] colliders = Physics.OverlapSphere(transform.position, attackRange, targetMasks);
         attackTarget = null; // Reset the attack target
@@ -204,7 +206,7 @@ public class EnemyArcher : Enemy {
 
         try {
             if (gameObject != null)
-                enemiesManager?.MoveEnemyToRandomSpawn(transform);
+                enemies?.MoveEnemyToRandomSpawn(transform);
         }
         catch (MissingReferenceException) {
             // Skip

@@ -88,11 +88,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <levelManager>k__BackingField: {fileID: 0}
+  <playerMovement>k__BackingField: {fileID: 0}
   <deathRespawnPoint>k__BackingField: {fileID: 0}
   <playerRespawnPoint>k__BackingField: {fileID: 0}
   <revalidateProperties>k__BackingField: 0
   <health>k__BackingField: 100
   <maxHealth>k__BackingField: 100
+  <lives>k__BackingField: 0
+  <maxLives>k__BackingField: 3
   <enemyRayCastDistance>k__BackingField: 60
   <enemyLayer>k__BackingField:
     serializedVersion: 2
@@ -379,7 +382,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2035
+    m_Bits: 4091
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

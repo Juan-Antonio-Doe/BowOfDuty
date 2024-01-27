@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour {
     [field: SerializeField, GetComponent, ReadOnlyField] private Rigidbody rb { get; set; }
 
     [field: Header("Arrow settings")]
+    [field: SerializeField] private BoxCollider childColl { get; set; }
     [field: SerializeField] public float damage { get; set; } = 10f;
     [field: SerializeField, ReadOnlyField] private bool stucked { get; set; } 
 
@@ -30,6 +31,20 @@ public class Arrow : MonoBehaviour {
         if (other.CompareTag("Ghost") && gameObject.layer == 10) {
             StickOnPoint(other.transform);
             other.GetComponent<Ghost>().TakeDamage(damage);
+            return;
+        }
+
+        // Compare if the target is a Tower and the arrow is an ally.
+        if (other.CompareTag("Tower") && gameObject.layer == 10) {
+            StickOnPoint(other.transform);
+            other.GetComponent<TowerColliderProxy>().TakeDamage(damage);
+            return;
+        }
+
+        // Compare if the taget is a Tower and the arrow is an enemy.
+        if (other.CompareTag("Tower") && gameObject.layer == 11) {
+            StickOnPoint(other.transform);
+            other.GetComponent<TowerColliderProxy>().TakeDamage(damage);
             return;
         }
 

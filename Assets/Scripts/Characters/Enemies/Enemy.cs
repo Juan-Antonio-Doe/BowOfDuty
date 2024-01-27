@@ -28,7 +28,7 @@ public abstract class Enemy : NPC {
         }
     }
 
-    void UpdateUI() {
+    protected void UpdateUI() {
         healthBar.fillAmount = health / maxHealth;
         healthText.text = $"{health} / {maxHealth}";
     }

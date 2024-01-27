@@ -177,7 +177,6 @@ MonoBehaviour:
   <healthText>k__BackingField: {fileID: 6505491078954265721}
   <enemyCanvasGO>k__BackingField: {fileID: 9154756947731593831}
   <canvasDisplayTime>k__BackingField: 1
-  <enemiesManager>k__BackingField: {fileID: 0}
   <agent>k__BackingField: {fileID: 4389434555793215646}
   <playerBase>k__BackingField: {fileID: 0}
   <bow>k__BackingField: {fileID: 6112309546542241209}
@@ -188,7 +187,7 @@ MonoBehaviour:
     m_Bits: 640
   <obstacleMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 72
   <attackTarget>k__BackingField: {fileID: 0}
   <meStateNow>k__BackingField: 0
 --- !u!114 &6112309546542241209
@@ -207,7 +206,7 @@ MonoBehaviour:
   <arrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: 1321c9c6adb2a9849a86234dafd9c136, type: 3}
   <arrowSpawnPoint>k__BackingField: {fileID: 4333834536538561855}
   <maxShootForce>k__BackingField: 100
-  <precision>k__BackingField: 2
+  <precision>k__BackingField: 3
 --- !u!114 &7874213164029583881
 MonoBehaviour:
   m_ObjectHideFlags: 0

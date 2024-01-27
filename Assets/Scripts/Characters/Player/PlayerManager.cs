@@ -144,4 +144,12 @@ public class PlayerManager : MonoBehaviour {
         ghostTime = maxGhostTime;
         playerMovement.unlimitedSprint = false;
     }
+
+    /*private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Arrow")) {
+            // Contrarrestar la fuerza de la flecha
+            playerMovement.rb.isKinematic = true;
+            playerMovement.rb.isKinematic = false;
+        }
+    }*/
 }

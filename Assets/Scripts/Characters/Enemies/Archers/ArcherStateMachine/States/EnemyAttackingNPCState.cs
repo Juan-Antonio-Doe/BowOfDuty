@@ -8,7 +8,7 @@ internal class EnemyAttackingNPCState : EnemyArcherState {
     public override void Update() {
         base.Update();
 
-        if (!TargetDetected() || !enemy.AttackTarget.CompareTag("Ally")) {
+        if (!TargetDetected()/* || (!enemy.AttackTarget.CompareTag("Ally") && !enemy.AttackTarget.CompareTag("Tower"))*/) {
             ChangeState(new EnemyMovingForwardState(enemy, agent));
             return;
         }

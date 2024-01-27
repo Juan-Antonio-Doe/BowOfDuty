@@ -14,7 +14,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour {
 
     [field: Header("- Autoattach propierties -")]
-    [field: SerializeField, GetComponent, ReadOnlyField] private Rigidbody rb { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] public Rigidbody rb { get; private set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private CapsuleCollider playerCollider { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private PlayerWallRun playerWallRun { get; set; }
 

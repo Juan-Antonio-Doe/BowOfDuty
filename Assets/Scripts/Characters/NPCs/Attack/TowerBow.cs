@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBow : MonoBehaviour {
+public class TowerBow : MonoBehaviour {
 
     [field: Header("Autoattach properties")]
-    [field: SerializeField, GetComponent, ReadOnlyField] private EnemyArcher me { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private Tower me { get; set; }
 
     [field: Header("Shoot settings")]
-    [field: SerializeField] private Rigidbody arrowPrefab { get; set; }
-    [field: SerializeField] public Transform arrowSpawnPoint { get; private set; }
+    [field: SerializeField] private Rigidbody enemyArrowPrefab { get; set; }
+    [field: SerializeField] private Rigidbody allyArrowPrefab { get; set; }
+    [field: SerializeField] public Transform arrowSpawnPoint { get; set; }
     [field: SerializeField] private float maxShootForce { get; set; } = 100f;
     [field: SerializeField, Range(0, 4)] private float precision { get; set; } = 1f;
 
@@ -23,31 +24,28 @@ public class EnemyBow : MonoBehaviour {
     float previousShootForce = 0f;
     float actualShootForce = 0f;
 
-    /*void Update() {
-        if (me.AttackTarget != null && !inCooldown && !isDrawing) {
-            StartCoroutine(AttackCo());
-        }
-    }*/
+    void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
+        if (currentArrow != null && me.AttackTarget != null)
+            currentArrow.transform.rotation = Quaternion.LookRotation(me.AttackTarget.position - arrowSpawnPoint.position);
+    }
 
     void StartDrawingBow() {
-        currentArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(me.AttackTarget.position - transform.position));
-        /*if (gameObject.CompareTag("Enemy")) {
-            currentArrow.gameObject.layer = LayerMask.NameToLayer("ArrowEnemy");
-        }*/
-        currentArrow.transform.parent = arrowSpawnPoint;
         isDrawing = true;
+
+        if (me.isEnemyTower)
+            currentArrow = Instantiate(enemyArrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(me.AttackTarget.position - transform.position));
+        else
+            currentArrow = Instantiate(allyArrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(me.AttackTarget.position - transform.position));
+
+        currentArrow.transform.parent = arrowSpawnPoint;
     }
 
     void ReleaseArrow() {
-
-        // With square root:
-        /*float distanceToTarget = Vector3.Distance(transform.position, me.AttackTarget.position);
-        float shootForce = Mathf.Min(distanceToTarget * precision, maxShootForce);
-        //float actualShootForce = Mathf.Clamp(shootForce * drawDuration, 0, shootForce);
-        float actualShootForce = shootForce;    /// TODO: Remove this line someday*/
-
         // Without square root:
-        Vector3 diff = me.AttackTarget.position - transform.position;
+        Vector3 diff = me.AttackTarget.position - arrowSpawnPoint.position;
         float distanceToTargetSquared = diff.sqrMagnitude;
         float shootForce = Mathf.Min(distanceToTargetSquared * (precision * precision), maxShootForce * maxShootForce);
 
@@ -60,7 +58,6 @@ public class EnemyBow : MonoBehaviour {
         currentArrow.transform.parent = null;
         Rigidbody arrowRigidbody = currentArrow;
         arrowRigidbody.isKinematic = false;
-        //arrowRigidbody.AddForce((me.AttackTarget.position - transform.position).normalized * actualShootForce, ForceMode.Impulse);
         diff.y += 0.5f; // To make the arrow go a little bit higher
         arrowRigidbody.AddForce(diff.normalized * actualShootForce, ForceMode.Impulse);
         arrowRigidbody.useGravity = true;
