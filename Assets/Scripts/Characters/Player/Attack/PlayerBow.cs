@@ -8,6 +8,8 @@ public class PlayerBow : MonoBehaviour {
     [field: SerializeField] private Rigidbody arrowPrefab { get; set; }
     [field: SerializeField] private Transform arrowSpawnPoint { get; set; }
     [field: SerializeField] private float shootForce { get; set; } = 20f;
+    [field: SerializeField] private float fireRate { get; set; } = 0.5f;
+    private float nextFire { get; set; }
     [field: SerializeField] private Camera playerCamera { get; set; }
 
     private Rigidbody currentArrow { get; set;}
@@ -18,7 +20,8 @@ public class PlayerBow : MonoBehaviour {
         if (!LevelManager.IsLevelOnGoing)
             return;
 
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire) {
+            nextFire = Time.time + fireRate;
             StartDrawingBow();
         }
         else if (isDrawing && Input.GetButtonUp("Fire1")) {

@@ -79,7 +79,10 @@ public class TowerBow : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
-        ReleaseArrow();
+        if (me.AttackTarget != null)
+            ReleaseArrow();
+        else
+            CancelAttack();
 
         yield return new WaitForSeconds(me.AttackCooldown);
         inCooldown = false;

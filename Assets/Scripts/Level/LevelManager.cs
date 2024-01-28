@@ -16,20 +16,7 @@ public class LevelManager : MonoBehaviour {
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private AlliesManager alliesManager { get; set; }
 
-    [field: Header("Level Properties")]
-    [field: Header("Player")]
-    [field: SerializeField, ReadOnlyField] private int ghostsRekilled { get; set; }
-    public int GhostsRekilled { get { return ghostsRekilled; } 
-        set { 
-            ghostsRekilled = value; 
-            if (ghostsRekilled >= ghostsRekilledMaxCountForResurrect) {
-                playerManager.ResurrectPlayer();
-                ghostsRekilled = 0;
-            }
-        } 
-    }
-
-    [field: SerializeField] private int ghostsRekilledMaxCountForResurrect { get; set; } = 10;
+    //[field: Header("Level Properties")]
 
     [field: Header("Debug")]
     [field: SerializeField, ReadOnlyField] private bool isLevelOnGoingDebug { get; set; }

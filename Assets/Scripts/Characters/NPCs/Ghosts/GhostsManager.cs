@@ -7,7 +7,6 @@ public class GhostsManager : MonoBehaviour {
 
     [field: Header("Autoattach properties")]
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private PlayerManager player { get; set; }
-    [field: SerializeField, FindObjectOfType, ReadOnlyField] public LevelManager levelManager { get; private set; }
     public PlayerManager Player { get => player; }
 
     [field: Header("Ghosts settings")]
@@ -19,7 +18,7 @@ public class GhostsManager : MonoBehaviour {
     private Coroutine reactivateGhostsCo { get; set; }
 
     IEnumerator Start() {
-        ghostPool = ObjectPool.CreatePool(ghostPrefab, 20, $"__GhostsPool__", transform.GetChild(0).transform);
+        ghostPool = ObjectPool.CreatePool(ghostPrefab, maxGhosts, $"__GhostsPool__", transform.GetChild(0).transform);
 
         yield return new WaitForSeconds(1f);
 

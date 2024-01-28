@@ -82,7 +82,7 @@ public class Ghost : NPC {
     protected override void Die() {
         base.Die();
 
-        ghostsManager.levelManager.GhostsRekilled++;
+        ghostsManager.Player.GhostsRekilled--;
     }
 
     private void OnDrawGizmosSelected() {

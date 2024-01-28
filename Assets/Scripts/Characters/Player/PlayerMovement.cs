@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     [field: SerializeField, GetComponent, ReadOnlyField] public Rigidbody rb { get; private set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private CapsuleCollider playerCollider { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private PlayerWallRun playerWallRun { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private PlayerHUD playerHUD { get; set; }
 
     [field: Header("Player stats")]
     [field: SerializeField, ReadOnlyField] private float playerHeight { get; set; } = 2f;
@@ -138,11 +139,16 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void ControlSpeed() {
+        Vector3 vel = rb.velocity;
+        vel.y = 0;
+
         if (isSprinting && isGrounded && sprintStamina > 0) {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
 
-            if (!unlimitedSprint)
+            if (!unlimitedSprint && vel.sqrMagnitude > 10) {
                 sprintStamina -= 10f * Time.deltaTime;
+                playerHUD.UpdateStamina(sprintStamina, sprintStaminaMax);
+            }
         }
         else if (playerWallRun.WallLeft || playerWallRun.WallRight) {
             moveSpeed = sprintSpeed * 1.5f;
@@ -151,8 +157,10 @@ public class PlayerMovement : MonoBehaviour {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
         }
 
-        if (!isSprinting && sprintStamina < sprintStaminaMax) {
+        if ((!isSprinting || vel.sqrMagnitude < 10) && sprintStamina < sprintStaminaMax) {
             sprintStamina += 10f * Time.deltaTime;
+            if (!unlimitedSprint)
+                playerHUD.UpdateStamina(sprintStamina, sprintStaminaMax);
         }
     }
 
