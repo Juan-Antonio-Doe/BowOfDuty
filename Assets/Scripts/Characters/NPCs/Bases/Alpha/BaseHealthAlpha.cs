@@ -36,7 +36,7 @@ public class BaseHealthAlpha : MonoBehaviour {
         UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
         bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
-        if (!isValidPrefabStage /*&& prefabConnected*/) {
+        if (!isValidPrefabStage && prefabConnected) {
             // Variables that will only be checked when they are in a scene
             if (!Application.isPlaying) {
 

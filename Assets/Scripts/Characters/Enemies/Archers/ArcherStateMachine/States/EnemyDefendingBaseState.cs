@@ -18,6 +18,7 @@ internal class EnemyDefendingBaseState : EnemyArcherState {
 
         if (!enemy.enemies.IsBaseBeingAttacked) {
             ChangeState(new EnemyMovingForwardState(enemy, agent));
+            return;
         }
 
         agent.SetDestination(enemy.enemies.AlliesManager.AttackersBase.position);

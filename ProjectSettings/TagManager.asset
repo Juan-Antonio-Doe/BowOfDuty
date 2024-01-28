@@ -15,6 +15,7 @@ TagManager:
   - Ghost
   - Tower
   - BatteringRam
+  - Gate
   layers:
   - Default
   - TransparentFX

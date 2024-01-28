@@ -28,6 +28,7 @@ public class BatteringRam : MonoBehaviour {
     private int hitsCounter { get; set; }
     [field: SerializeField] private float timeBetweenHits { get; set; } = 10f;
     private float timeCounter { get; set; }
+    [field: SerializeField] private float stepBackDistance { get; set; } = 2f;
     [field: SerializeField] private float cooldownTime { get; set; } = 10f;
 
     [field: Header("Waypoints")]
@@ -46,6 +47,8 @@ public class BatteringRam : MonoBehaviour {
 
     private Coroutine cooldownCo { get; set; }
     private Vector3 spawnPosition;
+    private bool onStepBack { get; set; }
+    private int permanentHitsCounter { get; set; }
 
     void OnValidate() {
 #if UNITY_EDITOR
@@ -74,17 +77,18 @@ public class BatteringRam : MonoBehaviour {
         revalidateProperties = false;
     }
 
-    IEnumerator Start() {
+    void Start() {
         health = maxHealth;
         spawnPosition = transform.position;
+    }
 
+    public void CanStart() {
+        StartCoroutine(CanStartCo());
+    }
+
+    IEnumerator CanStartCo() {
         yield return new WaitForSeconds(timeBeforeStartSpawn);
 
-        /*if (waypoints.Length > 0) {
-            currenState = STATE.Moving;
-            agent.SetDestination(waypoints[0].position);
-            currentWaypoint = 0;
-        }*/
         currenState = STATE.Moving;
     }
 
@@ -94,7 +98,7 @@ public class BatteringRam : MonoBehaviour {
                 agent.SetDestination(transform.position);
                 agent.ResetPath();
             }
-            currenState = STATE.Destroyed;
+            //currenState = STATE.Destroyed;
             return;
         }
 
@@ -136,22 +140,38 @@ public class BatteringRam : MonoBehaviour {
     }
 
     void Breaking() {
-        // ToDo: Trigger animation for hitting the enemy base's door.
-        // ToDo: Manage the hit counter.
+        agent.isStopped = false;
+
+        if (permanentHitsCounter >= Gate.maxHealth) {
+            currenState = STATE.Destroyed;
+            return;
+        }
 
         if (hitsCounter != hitsBeforeCooldown) {
             if (timeCounter <= 0) {
                 timeCounter = timeBetweenHits;
-                hitsCounter++;
-                HitDoor();
+                //HitDoor();
+                // Move forward to hit the door.
+                agent.updateRotation = true;
+                agent.SetDestination(waypoints[currentWaypoint].position);
+                onStepBack = false;
             }
             else {
                 timeCounter -= Time.deltaTime;
+                // Step back to deliver the next blow.
+                if (!onStepBack && agent.remainingDistance <= agent.stoppingDistance) {
+                    //agent.SetDestination(transform.position - transform.forward * stepBackDistance);
+                    agent.updateRotation = false;
+                    agent.SetDestination(transform.position - transform.forward * stepBackDistance);
+                    onStepBack = true;
+                }
             }
         }
 
         if (hitsCounter >= hitsBeforeCooldown) {
             currenState = STATE.Cooldown;
+            onStepBack = false;
+            agent.updateRotation = true;
         }
     }
 
@@ -163,6 +183,9 @@ public class BatteringRam : MonoBehaviour {
 
         // ToDo: Waiting x time to be able to respawn again.
         yield return new WaitForSeconds(cooldownTime);
+
+        if (!LevelManager.IsLevelOnGoing)
+            StopCoroutine(cooldownCo);
 
         currentWaypoint = 0;
         health = maxHealth;
@@ -196,6 +219,7 @@ public class BatteringRam : MonoBehaviour {
 
     void Die() {
         isDead = true;
+        agent.updateRotation = true;
         currenState = STATE.Cooldown;
     }
 
@@ -205,6 +229,13 @@ public class BatteringRam : MonoBehaviour {
     }
 
     void HitDoor() {
-        Debug.Log("Hit door");
+        hitsCounter++;
+        permanentHitsCounter++;
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag("Gate")) {
+            HitDoor();
+        }
     }
 }
