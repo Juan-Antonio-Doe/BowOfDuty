@@ -359,9 +359,85 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8257000387394945462}
     m_Modifications:
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c13315cb5529e2a42af2b126f4e04ee6, type: 3}
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708056870540079233, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374151099835836544, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374151099835836544, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374151099835836544, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374151099835836544, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ca95bc066063644d9611b3f72c66b3f, type: 3}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466495750534881122, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3279609978199191070, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
       propertyPath: m_Name
       value: StatsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476082704150025577, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476082704150025577, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542275139120033562, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 7273654294667542874, guid: 7b338f06652a6a74880983b7cd65e5ca, type: 3}
       propertyPath: m_Pivot.x
