@@ -69,11 +69,13 @@ public class BaseHealthAlpha : MonoBehaviour {
 
         if (isEnemyBase) {
             winnerText.text = $"{winner} <color=green>Player</color>";
+            levelManager.EndLevel();
         } else {
-            winnerText.text = $"{winner} <color=red>Enemy</color>"; 
+            winnerText.text = $"{winner} <color=red>Enemy</color>";
+            levelManager.EndLevel(false);
         }
 
-        levelManager.EndLevel();
+        
     }
 
     void UpdateUI() {

@@ -2,6 +2,7 @@ using Nrjwolf.Tools.AttachAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
@@ -15,14 +16,29 @@ public class LevelManager : MonoBehaviour {
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private RespawnManager respawnManager { get; set; }
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private EnemiesManager enemiesManager { get; set; }
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private AlliesManager alliesManager { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private AudioSource audioSource { get; set; }
 
-    //[field: Header("Level Properties")]
+    [field: Header("Level UI Properties")]
+    [field: SerializeField] public GameObject hud { get; set; }
+    [field: SerializeField] private GameObject endLevelUI { get; set; }
+    [field: SerializeField] private float endLevelTime { get; set; } = 5f;
+
+    [field: Header("Level Audio Properties")]
+    [field: SerializeField] public AudioMixer audioMixer { get; private set; }
+
 
     [field: Header("Debug")]
     [field: SerializeField, ReadOnlyField] private bool isLevelOnGoingDebug { get; set; }
-	
+
+    void Awake() {
+        IsLevelOnGoing = false;
+        isLevelOnGoingDebug = false;
+    }
+
     void Start() {
-        StartLevel();
+        audioMixer = audioSource.outputAudioMixerGroup.audioMixer;
+
+        //StartLevel();
     }
 
     void Update() {
@@ -38,12 +54,16 @@ public class LevelManager : MonoBehaviour {
 
     public void EndLevel(bool win=true) {
         IsLevelOnGoing = false;
+        hud.SetActive(false);
+        endLevelUI.SetActive(true);
 
         if (win) {
-            Debug.Log("You win!");
+            endLevelUI.transform.GetChild(1).gameObject.SetActive(true);
         } else {
-            Debug.Log("Game Over");
+            endLevelUI.transform.GetChild(2).gameObject.SetActive(true);
         }
+
+        StartCoroutine(BackToMainMenuCo());
     }
 
     void RespawnEnemies() {
@@ -62,5 +82,23 @@ public class LevelManager : MonoBehaviour {
         if (respawnManager.AllyListCount > 0) {
             respawnManager.GetAllyFromPool();
         }
+    }
+
+    IEnumerator BackToMainMenuCo() {
+        yield return new WaitForSeconds(endLevelTime);
+        BackToMainMenu();
+    }
+
+    public void BackToMainMenu() {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void EnableDisableCursor(bool locked) {
+        if (PauseManager.onPause)
+            locked = false;
+
+        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !locked;
     }
 }

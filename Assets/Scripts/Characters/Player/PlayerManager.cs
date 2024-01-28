@@ -96,7 +96,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void Update() {
-        if (!LevelManager.IsLevelOnGoing)
+        if (!LevelManager.IsLevelOnGoing || PauseManager.onPause)
             return;
 
         if (!isDead) {

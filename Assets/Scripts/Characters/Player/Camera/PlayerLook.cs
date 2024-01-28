@@ -23,20 +23,18 @@ public class PlayerLook : MonoBehaviour {
     private float yRotation { get; set; }
 
     Vector2 cameraInput { get; set; } = Vector2.zero;
-	
-    void Start() {
-        /*if (cam == null)
-            cam = GetComponentInChildren<Camera>();*/
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing || PauseManager.onPause)
+            return;
+
         PlayerRotation();
     }
 
     void LateUpdate() {
+        if (!LevelManager.IsLevelOnGoing || PauseManager.onPause)
+            return;
+
         CameraRotation();
     }
 

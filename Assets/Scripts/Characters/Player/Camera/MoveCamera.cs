@@ -12,4 +12,8 @@ public class MoveCamera : MonoBehaviour {
     void Update() {
         transform.position = cameraPosition.position;
     }
+
+    public void ResetCameraPosition(Transform cameraPosition) {
+        cameraPosition.rotation = Quaternion.Euler(0f, 0f, 0f);
+    }
 }

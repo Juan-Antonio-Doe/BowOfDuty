@@ -10,14 +10,14 @@ public class PlayerBow : MonoBehaviour {
     [field: SerializeField] private float shootForce { get; set; } = 20f;
     [field: SerializeField] private float fireRate { get; set; } = 0.5f;
     private float nextFire { get; set; }
-    [field: SerializeField] private Camera playerCamera { get; set; }
+    [field: SerializeField] private Transform playerCamera { get; set; }
 
     private Rigidbody currentArrow { get; set;}
     private bool isDrawing { get; set; }
     private float drawStartTime { get; set; }
 
     void Update() {
-        if (!LevelManager.IsLevelOnGoing)
+        if (!LevelManager.IsLevelOnGoing || PauseManager.onPause)
             return;
 
         if (Input.GetButtonDown("Fire1") && Time.time > nextFire) {
