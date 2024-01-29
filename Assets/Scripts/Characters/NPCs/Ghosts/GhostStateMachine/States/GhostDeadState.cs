@@ -11,7 +11,7 @@ internal class GhostDeadState : GhostState {
         agent.isStopped = true;
         agent.ResetPath();
 
-        DeleteArrowsOnBody();
+        DeleteArrowsOnBody(1);
 
         base.Enter();
     }

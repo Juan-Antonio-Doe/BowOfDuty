@@ -7,12 +7,16 @@ public class Arrow : MonoBehaviour {
 
     [field: Header("Autoattach properties")]
     [field: SerializeField, GetComponent, ReadOnlyField] public Rigidbody rb { get; set; }
-    [field: SerializeField, GetComponent, ReadOnlyField] private AudioSource flySound { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private AudioSource audioSource { get; set; }
 
     [field: Header("Arrow settings")]
     [field: SerializeField] private BoxCollider childColl { get; set; }
     [field: SerializeField] public float damage { get; set; } = 10f;
-    [field: SerializeField, ReadOnlyField] private bool stucked { get; set; } 
+    [field: SerializeField, ReadOnlyField] private bool stucked { get; set; }
+
+    [field: Header("Arrow sounds")]
+    [field: SerializeField] private AudioClip flySound { get; set; }
+    [field: SerializeField] private AudioClip hitSound { get; set; }
 
     private void OnTriggerEnter(Collider other) {
         if (stucked) return;
@@ -90,10 +94,15 @@ public class Arrow : MonoBehaviour {
         rb.isKinematic = true;
         rb.useGravity = false;
         transform.SetParent(parent);
+        if (hitSound != null)
+            audioSource.PlayOneShot(hitSound);
     }
 
     public void PlayFlySound() {
-        if (flySound != null && flySound.clip != null)
-            flySound.PlayOneShot(flySound.clip);
+        if (audioSource != null) {
+            if (audioSource.clip != null) {
+                audioSource.PlayOneShot(flySound);
+            }
+        }
     }
 }

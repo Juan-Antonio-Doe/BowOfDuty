@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour {
     [field: SerializeField, FindObjectOfType, ReadOnlyField] private LevelManager levelManager { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private PlayerMovement playerMovement { get; set; }
     [field: SerializeField, GetComponent, ReadOnlyField] private PlayerHUD playerHUD { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private AudioSource audioSource { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform deathRespawnPoint { get; set; }
     [field: SerializeField, ReadOnlyField] private Transform playerRespawnPoint { get; set; }
     [field: SerializeField] private bool revalidateProperties { get; set; } = false;
@@ -40,6 +41,10 @@ public class PlayerManager : MonoBehaviour {
             }
         }
     }
+
+    [field: Header("Player sounds")]
+    [field: SerializeField] private AudioClip damageSound { get; set; }
+    [field: SerializeField] private AudioClip deathSound { get; set; }
 
     [field: Header("Death")]
     [field: SerializeField] private UnityEvent onDeadEvent { get; set; }
@@ -123,7 +128,11 @@ public class PlayerManager : MonoBehaviour {
     public void TakeDamage(float damage) {
         if (health > 0) {
             health -= damage;
+            
             playerHUD.UpdateHealth(health, maxHealth);
+
+            if (damageSound != null)
+                audioSource.PlayOneShot(damageSound);
             if (health <= 0) {
                 Die();
             }
@@ -140,6 +149,8 @@ public class PlayerManager : MonoBehaviour {
         playerHUD.UpdateUIOnDie(ghostsKilledForResurrect);
         playerHUD.UpdateGhostCounter(ghostsRekilled);
         onDeadEvent?.Invoke();
+        if (deathSound != null)
+            audioSource.PlayOneShot(deathSound);
     }
 
     void CheckEnemyInFront() {
@@ -173,7 +184,8 @@ public class PlayerManager : MonoBehaviour {
         playerMovement.unlimitedSprint = false;
         playerHUD.UpdateUIOnResurrect();
         playerMovement.rb.isKinematic = true;
-        transform.position = playerRespawnPoint.position;
+        //transform.position = playerRespawnPoint.position;
+        playerMovement.rb.position = playerRespawnPoint.position;
         playerMovement.rb.isKinematic = false;
     }
 }

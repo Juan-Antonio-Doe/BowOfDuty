@@ -49,10 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <rb>k__BackingField: {fileID: 2608152870084404646}
-  <flySound>k__BackingField: {fileID: -6619882387793021158}
+  <audioSource>k__BackingField: {fileID: -6619882387793021158}
   <childColl>k__BackingField: {fileID: 4703138115806969655}
   <damage>k__BackingField: 10
   <stucked>k__BackingField: 0
+  <flySound>k__BackingField: {fileID: 0}
+  <hitSound>k__BackingField: {fileID: 0}
 --- !u!65 &2832387573066961853
 BoxCollider:
   m_ObjectHideFlags: 0

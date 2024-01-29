@@ -24,7 +24,7 @@ public class AllyArcherState : NPCState {
     }
 
     public override void Update() {
-        if (ally.IsDead) {
+        if (ally.IsDead && !isAlreadyDead) {
             ChangeState(new AllyDeadState(ally, agent));
             return;
         }

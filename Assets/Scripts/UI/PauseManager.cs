@@ -1,7 +1,6 @@
 using Nrjwolf.Tools.AttachAttributes;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +20,9 @@ public class PauseManager : MonoBehaviour {
     }
 
     void Update() {
+        if (!LevelManager.IsLevelOnGoing)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
             Pause();
     }

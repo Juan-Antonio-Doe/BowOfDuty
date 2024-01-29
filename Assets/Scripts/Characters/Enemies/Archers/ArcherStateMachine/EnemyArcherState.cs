@@ -34,7 +34,7 @@ public class EnemyArcherState : NPCState {
     }
 
     public override void Update() {
-        if (enemy.IsDead) {
+        if (enemy.IsDead && !isAlreadyDead) {
             ChangeState(new EnemyDeadState(enemy, agent));
             return;
         }

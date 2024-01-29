@@ -12,8 +12,9 @@ internal class AllyDeadState : AllyArcherState {
         agent.isStopped = true;
         agent.ResetPath();
 
-        DeleteArrowsOnBody();
+        DeleteArrowsOnBody(2);
 
+        npc.SetActive(false);
         base.Enter();
     }
 

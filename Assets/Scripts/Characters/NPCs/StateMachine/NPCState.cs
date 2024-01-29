@@ -52,12 +52,13 @@ public class NPCState {
         npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-    protected void DeleteArrowsOnBody() {
-        if (npc.transform.childCount > 2) {
+    protected void DeleteArrowsOnBody(int minChildrens) {
+        if (npc.transform.childCount > minChildrens) {
             // Destroy gameobject from the last child to the third child (inclusive).
-            for (int i = npc.transform.childCount - 1; i >= 2; i--) {
+            for (int i = npc.transform.childCount - 1; i >= minChildrens; i--) {
                 if (npc.transform.GetChild(i) != null) {
                     GameObject.Destroy(npc.transform.GetChild(i).gameObject);
+                    //Debug.Log($"Destroying arrow {i}");
                 }
             }
         }

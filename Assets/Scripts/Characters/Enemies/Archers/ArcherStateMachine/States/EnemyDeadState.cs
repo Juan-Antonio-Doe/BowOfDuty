@@ -13,8 +13,9 @@ internal class EnemyDeadState : EnemyArcherState {
         agent.isStopped = true;
         agent.ResetPath();
 
-        DeleteArrowsOnBody();
+        DeleteArrowsOnBody(3);
 
+        npc.SetActive(false);
         base.Enter();
     }
 

@@ -27,7 +27,9 @@ public class PlayerBow : Bow {
         else if (isDrawing && Input.GetButtonUp("Fire1")) {
             ReleaseArrow();
         }
+    }
 
+    void LateUpdate() {
         if (isDrawing) {
             currentArrow.transform.rotation = Quaternion.LookRotation(playerCamera.transform.forward);
         }

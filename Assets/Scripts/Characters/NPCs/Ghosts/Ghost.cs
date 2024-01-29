@@ -80,9 +80,9 @@ public class Ghost : NPC {
 
 
     protected override void Die() {
-        base.Die();
-
         ghostsManager.Player.GhostsRekilled--;
+        base.Die();
+        gameObject.SetActive(false);
     }
 
     private void OnDrawGizmosSelected() {

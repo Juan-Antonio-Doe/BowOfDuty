@@ -29,6 +29,6 @@ public abstract class NPC : MonoBehaviour {
 
     protected virtual void Die() {
         isDead = true;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

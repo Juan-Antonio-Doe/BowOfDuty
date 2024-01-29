@@ -55,6 +55,7 @@ MonoBehaviour:
   <timeBeforeStartSpawn>k__BackingField: 30
   <hitsBeforeCooldown>k__BackingField: 2
   <timeBetweenHits>k__BackingField: 10
+  <stepBackDistance>k__BackingField: 2
   <cooldownTime>k__BackingField: 10
   <waypoints>k__BackingField:
   - {fileID: 0}
@@ -136,7 +137,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3, z: 4}
+  m_Size: {x: 2, y: 2, z: 4}
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!1001 &5084541382742888222
 PrefabInstance:
@@ -176,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1455108867820607524, guid: c2fa5c675bb2c6441a6d29b4b737af74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1455108867820607524, guid: c2fa5c675bb2c6441a6d29b4b737af74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
