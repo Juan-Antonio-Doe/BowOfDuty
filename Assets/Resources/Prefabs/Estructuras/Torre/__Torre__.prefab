@@ -120,12 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fc5c02f5771fa4692e5856a2d2776b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <me>k__BackingField: {fileID: 736650523197948537}
-  <enemyArrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: 1321c9c6adb2a9849a86234dafd9c136, type: 3}
-  <allyArrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
+  <arrowPrefab>k__BackingField: {fileID: 0}
   <arrowSpawnPoint>k__BackingField: {fileID: 5374325030302673028}
   <maxShootForce>k__BackingField: 100
   <precision>k__BackingField: 3
+  <me>k__BackingField: {fileID: 736650523197948537}
+  <enemyArrowPrefab>k__BackingField: {fileID: -3917353614626516677, guid: 1321c9c6adb2a9849a86234dafd9c136, type: 3}
+  <allyArrowPrefab>k__BackingField: {fileID: -3917353614626516677, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
 --- !u!65 &4542110078358915826
 BoxCollider:
   m_ObjectHideFlags: 0

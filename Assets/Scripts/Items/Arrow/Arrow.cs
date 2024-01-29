@@ -6,7 +6,8 @@ using UnityEngine;
 public class Arrow : MonoBehaviour {
 
     [field: Header("Autoattach properties")]
-    [field: SerializeField, GetComponent, ReadOnlyField] private Rigidbody rb { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] public Rigidbody rb { get; set; }
+    [field: SerializeField, GetComponent, ReadOnlyField] private AudioSource flySound { get; set; }
 
     [field: Header("Arrow settings")]
     [field: SerializeField] private BoxCollider childColl { get; set; }
@@ -89,5 +90,10 @@ public class Arrow : MonoBehaviour {
         rb.isKinematic = true;
         rb.useGravity = false;
         transform.SetParent(parent);
+    }
+
+    public void PlayFlySound() {
+        if (flySound != null && flySound.clip != null)
+            flySound.PlayOneShot(flySound.clip);
     }
 }

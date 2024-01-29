@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <levelManager>k__BackingField: {fileID: 0}
   <playerMovement>k__BackingField: {fileID: 0}
+  <playerHUD>k__BackingField: {fileID: 0}
   <deathRespawnPoint>k__BackingField: {fileID: 0}
   <playerRespawnPoint>k__BackingField: {fileID: 0}
   <revalidateProperties>k__BackingField: 0
@@ -103,6 +104,8 @@ MonoBehaviour:
     m_Bits: 256
   <maxGhostTime>k__BackingField: 30
   <ghostTime>k__BackingField: 0
+  <ghostsKilledForResurrect>k__BackingField: 10
+  <ghostsRekilled>k__BackingField: 10
   <onDeadEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -118,9 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563d14faeca6281408042a8583fcee0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <arrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
+  <arrowPrefab>k__BackingField: {fileID: -3917353614626516677, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
   <arrowSpawnPoint>k__BackingField: {fileID: 750077448364403445}
-  <shootForce>k__BackingField: 50
+  <maxShootForce>k__BackingField: 75
+  <precision>k__BackingField: 0
+  <fireRate>k__BackingField: 0.5
   <playerCamera>k__BackingField: {fileID: 6335442009185938622}
 --- !u!114 &1696817624630897742
 MonoBehaviour:
@@ -137,6 +142,7 @@ MonoBehaviour:
   <rb>k__BackingField: {fileID: 3992482937200766475}
   <playerCollider>k__BackingField: {fileID: 154474873582632343}
   <playerWallRun>k__BackingField: {fileID: 2152032755668396595}
+  <playerHUD>k__BackingField: {fileID: 0}
   <playerHeight>k__BackingField: 2
   <groundCheck>k__BackingField: {fileID: 9016980588565559705}
   <groundMask>k__BackingField:
@@ -168,6 +174,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a02d1b43cbde824582c0d9295159453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <levelManager>k__BackingField: {fileID: 0}
+  <player>k__BackingField: {fileID: 0}
+  <healthBar>k__BackingField: {fileID: 0}
+  <healthText>k__BackingField: {fileID: 0}
+  <lives>k__BackingField:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  <ghostToSuppressText>k__BackingField: {fileID: 0}
+  <ghostCounterGO>k__BackingField: {fileID: 0}
+  <staminaBar>k__BackingField: {fileID: 0}
+  <ghostBarColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <staminaBarColor>k__BackingField: {r: 0.5137255, g: 0.42352942, b: 0.06666667, a: 1}
+  <revalidateProperties>k__BackingField: 0
 --- !u!114 &2152032755668396595
 MonoBehaviour:
   m_ObjectHideFlags: 0

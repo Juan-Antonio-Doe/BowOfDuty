@@ -81,11 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd083f2f5f4bcae46af3159b0c052e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <me>k__BackingField: {fileID: 137215558639725095}
-  <arrowPrefab>k__BackingField: {fileID: 2608152870084404646, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
+  <arrowPrefab>k__BackingField: {fileID: -3917353614626516677, guid: a22a76005f02c984db5dfaaa41cd37d8, type: 3}
   <arrowSpawnPoint>k__BackingField: {fileID: 7607906937948254753}
   <maxShootForce>k__BackingField: 100
   <precision>k__BackingField: 3
+  <me>k__BackingField: {fileID: 137215558639725095}
 --- !u!114 &3282931705039118936
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -129,7 +129,7 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-        Debug.Log($"Player health: <color=green>{health}</color>");
+        //Debug.Log($"Player health: <color=green>{health}</color>");
     }
 
     void Die() {
@@ -165,9 +165,6 @@ public class PlayerManager : MonoBehaviour {
 
     public void ResurrectPlayer() {
         isGhost = false;
-        playerMovement.rb.isKinematic = true;
-        transform.position = playerRespawnPoint.position;
-        playerMovement.rb.isKinematic = false;
         health = maxHealth;
         playerHUD.UpdateHealth(health, maxHealth);
         isDead = false;
@@ -175,5 +172,8 @@ public class PlayerManager : MonoBehaviour {
         ghostsRekilled = ghostsKilledForResurrect;
         playerMovement.unlimitedSprint = false;
         playerHUD.UpdateUIOnResurrect();
+        playerMovement.rb.isKinematic = true;
+        transform.position = playerRespawnPoint.position;
+        playerMovement.rb.isKinematic = false;
     }
 }

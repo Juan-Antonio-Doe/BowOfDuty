@@ -771,38 +771,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <allyList>k__BackingField.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <allyList>k__BackingField.Array.data[5]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <allyList>k__BackingField.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <allyList>k__BackingField.Array.data[17]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <enemyList>k__BackingField.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <enemyList>k__BackingField.Array.data[14]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <enemyList>k__BackingField.Array.data[15]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 53779191605532606, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <enemyList>k__BackingField.Array.data[16]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 503195088101946879, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -842,38 +810,6 @@ PrefabInstance:
     - target: {fileID: 503195088101946879, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <healthBar>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <healthText>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <staminaBar>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <ghostCounterGO>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <ghostToSuppressText>k__BackingField
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <lives>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <lives>k__BackingField.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033708141794108412, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
-      propertyPath: <lives>k__BackingField.Array.data[2]
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6247404429511052812, guid: 6bd6f9da6f0a86041b514e228bdb8433, type: 3}
       propertyPath: m_Name

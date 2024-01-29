@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBow : MonoBehaviour {
+public class PlayerBow : Bow {
 
-    [field: Header("Shoot settings")]
-    [field: SerializeField] private Rigidbody arrowPrefab { get; set; }
+    [field: Header("Player Shoot settings")]
+    /*[field: SerializeField] private Rigidbody arrowPrefab { get; set; }
     [field: SerializeField] private Transform arrowSpawnPoint { get; set; }
-    [field: SerializeField] private float shootForce { get; set; } = 20f;
+    [field: SerializeField] private float maxShootForce { get; set; } = 20f;*/
     [field: SerializeField] private float fireRate { get; set; } = 0.5f;
     private float nextFire { get; set; }
     [field: SerializeField] private Transform playerCamera { get; set; }
 
-    private Rigidbody currentArrow { get; set;}
-    private bool isDrawing { get; set; }
+    /*private Rigidbody currentArrow { get; set;}
+    private bool isDrawing { get; set; }*/
     private float drawStartTime { get; set; }
 
     void Update() {
@@ -33,7 +33,7 @@ public class PlayerBow : MonoBehaviour {
         }
     }
 
-    void StartDrawingBow() {
+    protected override void StartDrawingBow() {
         currentArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, playerCamera.transform.rotation);
         currentArrow.transform.parent = arrowSpawnPoint;
         drawStartTime = Time.time;
@@ -42,13 +42,14 @@ public class PlayerBow : MonoBehaviour {
 
     void ReleaseArrow() {
         float drawDuration = Time.time - drawStartTime;
-        float actualShootForce = Mathf.Clamp(shootForce * drawDuration, 0, shootForce);
+        float actualShootForce = Mathf.Clamp(maxShootForce * drawDuration, 0, maxShootForce);
         currentArrow.transform.parent = null;
         //Rigidbody arrowRigidbody = currentArrow.GetComponent<Rigidbody>();
-        Rigidbody arrowRigidbody = currentArrow;
+        Rigidbody arrowRigidbody = currentArrow.rb;
         arrowRigidbody.isKinematic = false;
         //arrowRigidbody.AddForce(arrowSpawnPoint.forward * actualShootForce, ForceMode.Impulse);
         arrowRigidbody.AddForce(playerCamera.transform.forward * actualShootForce, ForceMode.Impulse);
+        currentArrow.PlayFlySound();
         //arrowRigidbody.AddTorque(playerCamera.transform.forward * actualShootForce, ForceMode.Impulse);
         arrowRigidbody.useGravity = true;
         isDrawing = false;

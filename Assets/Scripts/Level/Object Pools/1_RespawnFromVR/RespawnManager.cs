@@ -22,7 +22,8 @@ public class RespawnManager : MonoBehaviour {
         bool isValidPrefabStage = prefabStage != null && prefabStage.stageHandle.IsValid();
         bool prefabConnected = PrefabUtility.GetPrefabInstanceStatus(this.gameObject) == PrefabInstanceStatus.Connected;
         if (!isValidPrefabStage && prefabConnected) {
-            ValidateAssings();
+            if (revalidateProperties)
+                ValidateAssings();
         }
 #endif
     }
